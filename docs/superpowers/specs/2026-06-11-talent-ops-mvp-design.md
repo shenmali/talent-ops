@@ -211,7 +211,7 @@ decided_at: <zaman>
 
 ### 5.7 `data/tracker.md`
 
-Tek kanonik tablo: aday | rol | aşama | skor+güven | son aksiyon | sonraki aksiyon | aşamada geçen gün.
+Tek kanonik tablo: `| candidate-slug | role-slug | stage | weighted_total | confidence | updated_at | note |`. Aşamada geçen gün ve SLA uyarıları `updated_at`'ten türetilir (tracker mode ve board hesaplar) — türetilebilir veri tabloda saklanmaz. *(Revizyon 2026-06-11: implementasyonla hizalandı; önceki taslakta "son/sonraki aksiyon, aşamada geçen gün" kolonları vardı.)*
 
 ## 6. İş Akışları (Mode'lar)
 
