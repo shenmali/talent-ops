@@ -29,8 +29,9 @@ conflicts with this file, this file wins.
 - Roles live in `roles/<role-slug>/` with `role-contract.md`, `jd.md`, and
   `candidates/<candidate-slug>/`.
 - Candidate dir contents: `source/` (original files, never modified),
-  `profile.md`, `evidence.md`, `score.md`, `decision.md`,
-  `interview/<stage>-scorecard.md`.
+  `profile.md`, `evidence.md`, `score.md`, `decision.md`, `packet.md`
+  (decision packet, written by the decision mode),
+  `interview/<stage>-plan.md`, `interview/<stage>-scorecard.md`.
 - Slugs: lowercase kebab-case. Role slug from title; candidate slug from
   full name (`jane-doe`), add `-2` suffix on collision.
 - Shared data: `data/tracker.md` (pipeline table), `data/quarantine.md`,
@@ -52,6 +53,9 @@ conflicts with this file, this file wins.
   evidence_match, behavior_signals}, weighted_total, confidence,
   missing_evidence[], risks[], recommendation, scored_by, scored_at.
 - `decision.md`: see templates/decision.md. decided_by MUST be human:*.
+- `packet.md`: assembled by the decision mode — profile summary, evidence
+  table, score digest, scorecard digests, risks, ai_recommendation
+  (labeled assistive). No decisions live here.
 - Tracker table header (literal):
   `| candidate | role | stage | weighted_total | confidence | updated_at | note |`
   followed by a `| --- |`-style separator row. Data rows hold the slugs;
@@ -128,6 +132,15 @@ first rule that matches:
 4. weighted_total >= 3.3 → `shortlist`
 5. weighted_total >= 2.5 → `hold`
 6. otherwise → `reject-suggest`
+
+**Override (decision vs recommendation).** The two fields use different
+vocabularies — never compute `override` by string equality. Alignment:
+- `advanced` / `interviewing` align with `advance`, `shortlist`
+- `offer` / `hired` align with `advance`
+- `rejected` aligns with `reject-suggest`
+- `withdrawn` is candidate-driven: `override: false` always
+`override: true` when the human decision is NOT in the recommendation's
+aligned set above.
 
 ## Guards (preconditions for every mode)
 

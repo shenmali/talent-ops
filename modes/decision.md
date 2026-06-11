@@ -16,10 +16,12 @@ Invocation: /talent-ops decision <role-slug> <candidate-slug>
    "assistive — not a decision".
 2. Ask the user for: decision (a key of states.yml decisions),
    reason_code (REQUIRED for hired/rejected/withdrawn), reason_detail,
-   future_fit, recontact_after (default: +6 months for strong rejects).
+   future_fit, recontact_after (default +6 months; fill only when
+   future_fit is non-empty — mirrors the template).
 3. Validate against templates/states.yml. Write decision.md from the
    template: decided_by: human:<user.id from config/company-profile.yml>,
-   override = decision != ai_recommendation, decided_at: now.
+   override per the alignment table in _shared.md §Override (never
+   string equality), decided_at: now.
 4. Update the tracker stage per the decisions mapping, set updated_at.
 5. If rejected AND (total >= 3.5 OR user flags strong): append a talent
    memory entry (format in modes/memory.md).

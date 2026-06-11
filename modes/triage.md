@@ -35,9 +35,10 @@ Invocation: /talent-ops triage <role-slug>
    one from the upper reject band, one from the lower — not just the
    top); show each one's fit reason + strongest evidence; ask "confirm
    these too?". Only then write.
-6. Write decision.md per decided candidate (from the template; override =
-   decision != recommendation). Move tracker stages per the states.yml
-   decisions mapping, update updated_at.
+6. Write decision.md per decided candidate (from the template; override
+   per the alignment table in _shared.md §Override — never string
+   equality). Move tracker stages per the states.yml decisions mapping,
+   update updated_at.
 7. Strong-but-rejected (total >= 3.5, or the user says "good, but"):
    append a talent memory entry (format in modes/memory.md).
 

@@ -19,7 +19,9 @@ Invocation: /talent-ops interview-kit <role-slug> <candidate-slug>
 3. Forbidden: brainteasers, culture-fit vibe questions, and any question
    touching protected attributes (age, family plans, origin, health,
    beliefs).
-4. Write candidates/<slug>/interview/<stage>-plan.md and one scorecard per
-   stage from templates/scorecard.md (dimensions = the targets).
+4. Write candidates/<slug>/interview/<stage>-plan.md (frontmatter:
+   generated_by: ai:<model>, generated_at) and one scorecard per stage at
+   candidates/<slug>/interview/<stage>-scorecard.md from
+   templates/scorecard.md (dimensions = the targets).
 5. Point the user to the files; completed scorecards feed the decision
    packet.
