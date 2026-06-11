@@ -1,0 +1,37 @@
+# templates/states.yml — canonical pipeline vocabulary.
+# Scripts and modes validate against this file. Do not rename casually:
+# stage/reason values live inside candidate files and the tracker.
+
+stages:
+  - inbox
+  - parsed
+  - screened
+  - triage
+  - interview
+  - decision
+  - hired
+  - rejected
+  - withdrawn
+
+terminal: [hired, rejected, withdrawn]
+
+# decision.md "decision" value -> stage the candidate moves to.
+# "offer" is a decision value, NOT a stage (candidate waits in "decision").
+decisions:
+  advanced: interview
+  interviewing: interview
+  offer: decision
+  hired: hired
+  rejected: rejected
+  withdrawn: withdrawn
+
+# Factual reason codes only. No bias-prone codes (e.g. "culture fit").
+reason_codes:
+  - missing-must-have
+  - insufficient-evidence
+  - experience-level-mismatch
+  - hard-filter-fail
+  - compensation-mismatch
+  - stronger-shortlist
+  - candidate-withdrew
+  - position-filled
