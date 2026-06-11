@@ -30,4 +30,24 @@ describe('loadStates', () => {
     writeFileSync(join(root, 'templates/states.yml'), 'stages: [a]\n')
     expect(() => loadStates(root)).toThrow(/missing/)
   })
+
+  it('throws when a decision target is not in stages', () => {
+    const root = mkdtempSync(join(tmpdir(), 'to-'))
+    mkdirSync(join(root, 'templates'), { recursive: true })
+    writeFileSync(
+      join(root, 'templates/states.yml'),
+      'stages: [a]\nterminal: [a]\ndecisions: {ok: zzz}\nreason_codes: [x]\n'
+    )
+    expect(() => loadStates(root)).toThrow(/decision targets/)
+  })
+
+  it('throws a clear error when a key has the wrong type', () => {
+    const root = mkdtempSync(join(tmpdir(), 'to-'))
+    mkdirSync(join(root, 'templates'), { recursive: true })
+    writeFileSync(
+      join(root, 'templates/states.yml'),
+      'stages: inbox\nterminal: [inbox]\ndecisions: {}\nreason_codes: [x]\n'
+    )
+    expect(() => loadStates(root)).toThrow(/must be a list/)
+  })
 })

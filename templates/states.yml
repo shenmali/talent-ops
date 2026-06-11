@@ -17,6 +17,9 @@ terminal: [hired, rejected, withdrawn]
 
 # decision.md "decision" value -> stage the candidate moves to.
 # "offer" is a decision value, NOT a stage (candidate waits in "decision").
+# "advanced" records moving a candidate from triage into interviews;
+# "interviewing" records progress between interview rounds. Both target
+# the "interview" stage by design.
 decisions:
   advanced: interview
   interviewing: interview
