@@ -164,12 +164,14 @@ Expected: FAIL — "Cannot find module '../scripts/lib/frontmatter.mjs'"
 // scripts/lib/frontmatter.mjs
 import { parse, stringify } from 'yaml'
 
-const FM_RE = /^---\r?\n([\s\S]*?)\r?\n?---\r?\n?/
+// Kapanış çiti kendi satırında olmalı: içerik+newline tek opsiyonel grup —
+// YAML değeri "---" olan alanlar inline eşleşip veriyi bozamaz (review bulgusu).
+const FM_RE = /^---\r?\n(?:([\s\S]*?)\r?\n)?---(?:\r?\n|$)/
 
 export function parseFrontmatter(text) {
   const m = text.match(FM_RE)
   if (!m) throw new Error('missing frontmatter (expected leading --- block)')
-  return { data: parse(m[1]) ?? {}, body: text.slice(m[0].length) }
+  return { data: parse(m[1] ?? '') ?? {}, body: text.slice(m[0].length) }
 }
 
 export function serializeFrontmatter(data, body = '') {
@@ -181,6 +183,8 @@ export function serializeFrontmatter(data, body = '') {
 
 Run: `npx vitest run test/frontmatter.test.mjs`
 Expected: 4 passed
+
+Not (yürütme sırasında eklendi): nihai implementasyon iki regresyon testi daha içerir — YAML değeri `---` olan alan (`notes: ---` string olarak parse edilir, satırlar yutulmaz) ve kapanış çitinden sonra newline'sız biten dosya. Bkz. commit 886f5d1.
 
 - [ ] **Step 5: Commit**
 
