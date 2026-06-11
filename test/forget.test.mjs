@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { forgetCandidate } from '../scripts/forget.mjs'
 import { makeRepo, approvedContract, candidateFiles, trackerWith } from './helpers.mjs'
@@ -31,7 +31,7 @@ describe('forgetCandidate', () => {
   it('removes dir, tracker row, and memory entry — leaves others intact', () => {
     const root = repo()
     const res = forgetCandidate(root, 'demo-role', 'jane-doe')
-    expect(res).toEqual({ removedDir: true, trackerRows: 1, memoryEntries: 1 })
+    expect(res).toEqual({ removedDir: true, trackerRows: 1, memoryEntries: 1, batchRows: 0 })
     expect(existsSync(join(root, 'roles/demo-role/candidates/jane-doe'))).toBe(false)
     const tracker = readFileSync(join(root, 'data/tracker.md'), 'utf8')
     expect(tracker).not.toMatch(/jane-doe/)
@@ -39,6 +39,19 @@ describe('forgetCandidate', () => {
     const mem = readFileSync(join(root, 'data/talent-memory.md'), 'utf8')
     expect(mem).not.toMatch(/jane-doe/)
     expect(mem).toMatch(/demo-role\/bob/)
+  })
+
+  it('scrubs batch-state rows for the forgotten candidate', () => {
+    const root = repo()
+    writeFileSync(
+      join(root, 'data/batch-state.md'),
+      '| candidate | status | updated_at |\n| --- | --- | --- |\n| jane-doe | done | 2026-06-11 |\n| bob | failed | 2026-06-11 |\n'
+    )
+    const res = forgetCandidate(root, 'demo-role', 'jane-doe')
+    expect(res.batchRows).toBe(1)
+    const bs = readFileSync(join(root, 'data/batch-state.md'), 'utf8')
+    expect(bs).not.toMatch(/jane-doe/)
+    expect(bs).toMatch(/bob/)
   })
 
   it('dry-run reports but removes nothing', () => {

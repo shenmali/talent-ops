@@ -9,7 +9,7 @@ function writeAtomic(path, content) {
 }
 
 export function forgetCandidate(root, role, slug, { dryRun = false } = {}) {
-  const result = { removedDir: false, trackerRows: 0, memoryEntries: 0 }
+  const result = { removedDir: false, trackerRows: 0, memoryEntries: 0, batchRows: 0 }
 
   const dir = join(root, 'roles', role, 'candidates', slug)
   if (existsSync(dir)) {
@@ -47,6 +47,19 @@ export function forgetCandidate(root, role, slug, { dryRun = false } = {}) {
     if (!dryRun && result.memoryEntries) writeAtomic(memPath, kept.join('\n'))
   }
 
+  const batchPath = join(root, 'data/batch-state.md')
+  if (existsSync(batchPath)) {
+    const kept = readFileSync(batchPath, 'utf8').split('\n').filter((line) => {
+      const t = line.trim()
+      if (!t.startsWith('|')) return true
+      const cells = t.split('|').slice(1, -1).map((c) => c.trim())
+      const match = cells[0] === slug // batch-state has no role column
+      if (match) result.batchRows++
+      return !match
+    })
+    if (!dryRun && result.batchRows) writeAtomic(batchPath, kept.join('\n'))
+  }
+
   return result
 }
 
@@ -59,11 +72,14 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     process.exit(2)
   }
   const res = forgetCandidate(process.cwd(), role, slug, { dryRun })
-  console.log(`${dryRun ? '[dry-run] ' : ''}forget ${role}/${slug}: dir=${res.removedDir} trackerRows=${res.trackerRows} memoryEntries=${res.memoryEntries}`)
+  console.log(`${dryRun ? '[dry-run] ' : ''}forget ${role}/${slug}: dir=${res.removedDir} trackerRows=${res.trackerRows} memoryEntries=${res.memoryEntries} batchRows=${res.batchRows}`)
   console.log(
     'WARNING: removing files does NOT rewrite git history. For full erasure in a\n' +
       'version-controlled repo, also rewrite history, e.g.:\n' +
       `  git filter-repo --invert-paths --path roles/${role}/candidates/${slug}\n` +
-      'or keep real candidate data out of version control entirely.'
+      'or keep real candidate data out of version control entirely.\n' +
+      'Note: data/inbox and data/quarantine.md are not candidate records and\n' +
+      'are not touched — review them manually if the person\u2019s documents were\n' +
+      'never imported.'
   )
 }
