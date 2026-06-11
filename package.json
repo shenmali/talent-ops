@@ -1,0 +1,18 @@
+{
+  "name": "talent-ops",
+  "version": "0.1.0",
+  "description": "Evidence-based hiring operating system for AI coding CLIs. The employer-side mirror of career-ops.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "vitest run",
+    "verify": "node scripts/verify.mjs",
+    "dedupe": "node scripts/dedupe.mjs",
+    "export-audit": "node scripts/export-audit.mjs",
+    "forget": "node scripts/forget.mjs"
+  },
+  "dependencies": { "yaml": "^2.4.0" },
+  "devDependencies": { "vitest": "^3.0.0" }
+}
