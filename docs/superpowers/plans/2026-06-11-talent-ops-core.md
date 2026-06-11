@@ -10,6 +10,15 @@
 
 **Spec:** `docs/superpowers/specs/2026-06-11-talent-ops-mvp-design.md`
 
+> **Yürütme notu (2026-06-11):** Bu plan subagent-driven-development ile
+> uygulandı ve TAMAMLANDI. Her görev iki aşamalı review'dan geçti; review
+> bulguları `fix:`/`fix(mode):` commit'leriyle uygulandı ve bazı dosyalar
+> plandaki kod bloklarının ötesine geçti (örn. _shared.md skorlama
+> kuralları, tracker başlık formatı, override hizalama tablosu, script
+> dayanıklılık yamaları). Kanonik kaynak artık REPO DOSYALARIDIR; bu
+> plan tarihsel kayıttır. Ayrıntı için `git log --oneline` üzerinde
+> review commit'lerine bakın.
+
 ---
 
 ## Dosya Haritası (bu planın sonunda repo)
