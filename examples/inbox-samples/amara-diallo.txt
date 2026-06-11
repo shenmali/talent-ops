@@ -1,0 +1,11 @@
+AMARA DIALLO
+amara.diallo@outlook.be | Ghent, BE | Belgian citizen | English C1, French native
+
+HR Operations Coordinator — Flandria Logistics (2024-now)
+- Automated my own reporting with Python (pandas) — monthly close from
+  2 days to 3 hours; scripts in production for the whole HR team since Q1.
+- Portfolio: amaradiallo.dev (4 case studies) | github.com/amaradiallo
+
+Education-to-tech path: Le Wagon data engineering bootcamp (2024),
+Microsoft PL-500 (Power Automate) certification in progress.
+Earlier: 3 years HR admin (payroll support, onboarding logistics).

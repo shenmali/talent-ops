@@ -1,0 +1,11 @@
+LUCAS VERMEULEN
+lucas.vermeulen@telenet.be | Leuven, BE | Belgische nationaliteit
+Talen: Nederlands (moedertaal), Engels (vloeiend), Frans (goed)
+
+HR Data Analist — Dijle Verzekeringen (2021-nu)
+- Python-scripts voor HR-rapportering (pandas, SQL), maandelijkse
+  rapportage geautomatiseerd.
+- Power Automate-flows voor verlofaanvragen, 1.200 medewerkers.
+- API-koppeling tussen HRIS en datawarehouse gebouwd (REST, Azure).
+
+Eerder: business analist, 4 jaar. Certificaat: PL-300.

@@ -1,0 +1,12 @@
+SOFIA MARCHETTI
+s.marchetti@libero.it | Milan, IT (open to Brussels relocation) | EU citizen | English C1
+
+HR Process Excellence Lead — Lombardia Assicurazioni (2018-now)
+- Re-engineered onboarding end-to-end: 23 steps to 9, cycle time -61%
+  (documented case study available).
+- Built the HR reporting suite in Excel + VBA macros; Power Query ETL
+  from the HRIS.
+- Led SuccessFactors module rollout for 3,000 employees.
+
+Tools: Excel/VBA expert, Power Query, Visio, SuccessFactors, Qlik.
+Note: no Python experience — strong process side.

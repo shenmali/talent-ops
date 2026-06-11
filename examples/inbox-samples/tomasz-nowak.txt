@@ -1,0 +1,12 @@
+TOMASZ NOWAK
+t.nowak@wp.pl | Warsaw, PL (remote-first, monthly Brussels OK) | EU citizen | English C1
+
+RPA Developer — Vistula Bank (2020-now)
+- 25+ UiPath production robots for HR & finance back office; saved est.
+  20 FTE-hours/day. Orchestrator administration.
+- Python scripting for data prep and robot exception handling (repo:
+  github.com/tnowak-rpa/uipath-helpers).
+- Zapier + Make integrations for the HR helpdesk.
+
+Earlier: ETL developer (SQL Server, SSIS), 3 years.
+Note: no Power Automate specifically; deep UiPath.

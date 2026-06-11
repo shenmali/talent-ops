@@ -1,0 +1,16 @@
+MAYA LINDQVIST
+maya.lindqvist@protonmail.com | Brussels, BE | EU citizen | English C1, Swedish native
+github.com/mayalq | mayalq.dev
+
+HR Systems Automation Engineer — Nordica Re (2022-now)
+- Built Python document-automation service for HR contracts (FastAPI + Azure
+  Functions); cut contract turnaround from 5 days to 4 hours, 11k docs/year.
+- Power Automate flows for onboarding task routing across 1,800 employees;
+  retired 14 manual checklists.
+- Integrated SuccessFactors with the data warehouse via OData APIs + dbt ETL.
+
+People Analytics Developer — Brightpath Consulting (2019-2022)
+- Self-service Power BI dashboards for absence/turnover used by 40 HRBPs.
+- Azure Data Factory pipelines (certified: DP-203).
+
+Talks: "Killing the HR spreadsheet" — HR Tech Benelux 2025.

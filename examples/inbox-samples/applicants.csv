@@ -1,0 +1,2 @@
+name,email,location,cv_text,links
+Noah Petit,noah.petit@skynet.be,"Namur, BE (EU citizen, English C1)","HRIS integration developer, 5 years. Python ETL pipelines between SuccessFactors and Snowflake in production. Power Automate for HR service desk (300 flows/month). Process mapping certified (BPMN).",github.com/noahpetit

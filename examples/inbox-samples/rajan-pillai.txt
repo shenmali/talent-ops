@@ -1,0 +1,12 @@
+RAJAN PILLAI
+rajan.pillai.dev@gmail.com | Mumbai, IN | Requires EU sponsorship | English C2
+github.com/rajanpillai-hr
+
+Lead HR Tech Engineer — Suryan InfoTech (2017-now)
+- Python microservices for HR document automation (Django, Celery),
+  60k employees served, 99.9% uptime.
+- Azure Logic Apps + Power Automate library: 40+ production flows.
+- API integration layer between SAP HCM and the lakehouse (Databricks).
+- AZ-204 and DP-203 certified. Conference: PyCon India 2024 speaker.
+
+Open to relocation; visa sponsorship required.
