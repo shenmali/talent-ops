@@ -1,0 +1,178 @@
+# **Talent-Ops: Yapay Zeka Odaklı İşe Alım İşletim Sistemi ve İnsan Kaynakları Teknolojilerinin Geleceği**
+
+İşe alım ve yetenek kazanımı süreçleri, tarihsel olarak idari yoğunluklu, doğrusal ve veri silolarına hapsolmuş bir yapı sergilemektedir. Piyasada "Career-Ops" (Aday İşletim Sistemi) konseptinin adayın iş bulma serüvenini optimize etmeye başlamasıyla birlikte, denklemin diğer tarafında işverenin doğru çalışanı bulmasını optimize edecek simetrik bir yapıya ihtiyaç doğmuştur. Bu gereksinim, yalnızca yeni bir Aday Takip Sistemi (ATS) inşa etmek değil; İşe Alım Yöneticisi (Hiring Manager), İşe Alım Uzmanı (Recruiter), İK İş Ortağı (HRBP) ve Yetenek Kazanımı (Talent Acquisition) ekiplerinin süreçlerini otonom yapay zeka ajanlarıyla baştan uca işleten bir "Talent-Ops" (Yetenek Operasyonları İşletim Sistemi) mimarisini zorunlu kılmaktadır.  
+Mevcut ATS çözümleri temel olarak özgeçmiş toplama, başvuruları depolama ve statik bir süreç takibi yapma işlevlerine indirgenmiştir. Ancak bu sistemler, işe alımın asıl problemleri olan; yanlış rol tanımlamaları, hedeflenmemiş ve yanlış aday havuzları oluşturulması, niteliksiz başvuru yığınları altında ezilme, tutarsız mülakat deneyimleri, insan önyargılarına dayalı düşük karar kalitesi ve kurumsal yetenek hafızasının kaybolması gibi yapısal sorunlara çözüm üretememektedir. Talent-Ops, bu sorunları çözmek amacıyla tasarlanmış 0.1 versiyonlu öncü bir vizyonu temsil etmektedir. Bir İşe Alım Yöneticisi sisteme sadece "Kıdemli bir Yapay Zeka Mühendisi işe al" komutunu verdiğinde; rolü otonom olarak oluşturan, yetkinlik (skill) haritasını çıkaran, iş tanımını (Job Description) üreten, ideal adayları bulan, başvuruları kanıta dayalı değerlendiren, mülakat kitleri oluşturan ve nihai bir karar raporu sunan bütünleşik bir zeka katmanıdır.
+
+## **İnsan Kaynakları Ekiplerinin Operasyonel Darboğazları: Nerede Boğuluyorlar?**
+
+Yetenek kazanımı departmanlarının kapasite sorunları incelendiğinde, temel problemin aday bulamamak değil, "koordinasyon arızaları" (coordination failures) olduğu görülmektedir. İşe alım uzmanlarının yaşadığı yüksek tükenmişlik oranlarının altında yatan ana neden, çalışma saatlerinin uzunluğu değil; uzmanlık gerektirmeyen, manuel ve tekrar eden görevlerin yarattığı bilişsel yük ve bağlam değişimidir (context switching)1. İşe alım uzmanlarının yaklaşık %81'i tükenmişlik hissi raporlarken, bu durumun temel tetikleyicisinin idari görevlerin yarattığı değer uyuşmazlığı olduğu tespit edilmiştir2.  
+Geleneksel bir yetenek kazanımı operasyonunda, zamanın büyük bir kısmı değer üretmeyen faaliyetlere harcanmaktadır. Yapılan sektörel analizler, işe alım ekiplerinin günlerinin yarısından fazlasını doğrudan işe alım becerisi gerektirmeyen görevlere ayırdığını ortaya koymaktadır.
+
+| Faaliyet Alanı | Harcanan Zaman (Haftalık) | Oransal Zaman Dağılımı | Operasyonel Etki |
+| :---- | :---- | :---- | :---- |
+| İdari Görevler ve Koordinasyon | 18 \- 28 Saat | %52 | Zamanın yarısı veri girişi, mülakat planlama ve ATS güncellemelerine gider. |
+| Aday Arama (Sourcing) ve İletişim | 13 \- 14 Saat | %28 | Aktif yetenek havuzu oluşturma ve adaylarla ilk temas süreci. |
+| İşe Alım Yöneticisi ile Etkileşim | 3 \- 4 Saat | %12 | İhtiyaç analizi, geri bildirim toplama ve süreç senkronizasyonu. |
+| Raporlama ve Stratejik Planlama | 2 \- 5 Saat | %8 | Liderlik ekipleri için manuel rapor hazırlama ve performans analizi. |
+
+Tablodaki veriler, işe alım süreçlerindeki yapısal israfı net bir şekilde ortaya koymaktadır1. Bir işe alım uzmanı, haftada 4 ila 6 saatini sadece mülakat takvimlerini ayarlamak ve iptalleri yönetmek için harcamaktadır1. Özgeçmişlerin manuel olarak elenmesi haftada 8-9 saat, ATS ve Müşteri İlişkileri Yönetimi (CRM) sistemlerine veri girmek ise 8 saatten fazla zaman almaktadır3. Bilgi işçilerinin bir görevden diğerine geçerken (örneğin e-posta yanıtlamaktan aday profili incelemeye) yaşadığı kesintiler sonrası tam odaklanma durumuna dönmeleri ortalama 23 dakika sürmektedir2. Günde ortalama 1.200 kez uygulama ve sekme değiştiren bir çalışanın yaşadığı "dikkat kalıntısı" (attention residue), karar verme kalitesini dramatik şekilde düşürmektedir2.  
+Bu manuel süreçlerin organizasyonlara maliyeti oldukça yüksektir. Doldurulamayan her bir açık pozisyon, şirkete haftalık ortalama 4.000 ABD Doları değerinde verimlilik kaybına mal olmaktadır1. Dahası, manuel aktarımların (handoffs) yarattığı gecikmeler nedeniyle, en yetenekli adayların %58'i sürecin yavaş ilerlemesi ve geri bildirim eksikliği yüzünden sistemden kopmaktadır1.
+
+## **Mevcut Pazar Çözümlerinin Yetersizliği ve Otomasyon Fırsatları**
+
+Talent-Ops vizyonunun temellendirilmesi için, mevcut ATS ve CRM pazarındaki ürünlerin güçlü yönleri ile yapay zeka çağına uyum sağlayamayan eksikliklerinin analiz edilmesi gerekmektedir. Pazardaki köklü yazılımlar belirli operasyonel ihtiyaçları çözse de, otonom zeka üretememektedir.
+
+| Mevcut Çözüm | Temel Odak Noktası | Yapısal Eksiklikler ve Talent-Ops'un Farkı |
+| :---- | :---- | :---- |
+| **Greenhouse** | Yapılandırılmış İşe Alım (Structured Hiring), Puan Kartları (Scorecards), İş Akışı Yönetimi. | AI-Native (Doğuştan Yapay Zeka) değildir. Formlar ve kurallar üzerine inşa edilmiştir, otonom karar destek sistemleri yoktur. |
+| **Lever** | ATS ve CRM entegrasyonu, aday ilişkileri yönetimi. | Derin aday istihbaratı (Deep candidate intelligence) üretemez; veriler yüzeysel beyanlara dayanır. |
+| **Ashby** | İleri düzey analitik, raporlama ve İşe Alım Operasyonları (Recruiting Ops). | Analitik sunar ancak otonom iş akışları (Autonomous workflows) yürüterek sürece müdahale edemez. |
+| **Workday** | Kurumsal (Enterprise) düzeyde geniş kapsamlı İK altyapısı. | Kullanıcı deneyimi oldukça hantaldır; işe alım süreci modüler çevikliğe sahip değildir. |
+| **Teamtailor** | İşveren markası (Employer branding) ve aday etkileşimi. | Güçlü pazarlama araçları sunar ancak adayın yetkinlik kanıtlarını analiz eden bir zeka katmanı barındırmaz. |
+
+Bu tablo ışığında, yetenek kazanımında neyin otomatize edileceği ve hızlandırılacağı netleşmektedir. Özgeçmiş ayrıştırma (parsing), mülakat takvimi oluşturma, aday takip mesajları gönderme, mülakat puanlarını toplama ve temel uygunluk filtrelemeleri (lokasyon, çalışma izni) tamamen otomatize edilmelidir. Böylece haftalık 30-40 saate varan idari kapasite kaybı geri kazanılabilir3. İnsan faktörü; stratejik hizalanma, kültürel uyum analizi, empati gerektiren ikna süreçleri ve nihai kararın etik gözetimi alanlarına kaydırılmalıdır.
+
+## **Temel Felsefe: Özgeçmiş, Aday Demek Değildir**
+
+Talent-Ops mimarisinin çekirdeğinde yatan temel felsefe, "Özgeçmiş ![][image1] Aday" (Resume \!= Candidate) prensibidir. Özgeçmiş, adayın geçmişini yansıtan sübjektif ve eksik bir veri kümesinden ibarettir. Gerçek bir yetenek zekası (Talent Intelligence) platformunda karar verme mekanizması; Özgeçmiş, LinkedIn profili, GitHub kod depoları, kişisel portföyler, açık kaynak katkıları, akademik yayınlar, mülakat verileri, referanslar ve davranışsal sinyallerin (Behavior Signals) bütünleşik bir sentezinden oluşmalıdır.  
+Adayın sadece beyan ettiği yetkinlikleri değil, bu yetkinlikleri üretim ortamında (production) nasıl uyguladığını kanıtlayan verilere ulaşmak, sistemi geleneksel bir ATS'den ayıran en önemli özelliktir.
+
+## **Talent-Ops İşe Alım Yaşam Döngüsü (Hiring Lifecycle)**
+
+Talent-Ops, işe alım sürecini reaktif bir işe alım talebinden (requisition) ziyade proaktif, tasarlanmış ve veri odaklı bir yaşam döngüsü olarak ele alır. Bu döngü beş ana fazdan oluşur ve her fazda yapay zeka ajanları (AI Agents) devrededir.
+
+### **Faz 1: İşgücü Planlaması (Workforce Planning)**
+
+Süreç, "Neden işe alıyoruz?" sorusuyla başlar. Sadece boş bir pozisyonu doldurmak yerine, işin iş hedefleriyle (Business Goal) olan bağlantısı kurulur. Sistem, ilgili ekipten, yöneticiden, bütçe kısıtlarından ve zaman çizelgelerinden veri toplar. Yapay zeka, bu verileri kullanarak pozisyonun iş ihtiyacını, başarı metriklerini ve aciliyetini tanımlayan yapılandırılmış (YAML tabanlı) bir çıktı üretir.
+
+### **Faz 2: Rol Tasarımı (Role Design)**
+
+İlan kopyalamak yerine, "Hiring Planner Agent" (İşe Alım Planlama Ajanı) işe alım yöneticisiyle asenkron bir diyalog kurar. Yöneticiye, adayın ilk 90 günündeki başarı hedeflerini, başarının somut olarak nasıl ölçüleceğini ve pozisyonun olmazsa olmaz (must-have) yetkinliklerini sorar. Bu sayede pozisyonun sorumlulukları ve beklenen iş sonuçları (outcomes) kesin sınırlarla belirlenir.
+
+### **Faz 3: Aday Personası Oluşturma (Candidate Persona)**
+
+Toplanan verilere dayanarak ideal çalışan profili algoritmik olarak modellenir. Örneğin, yapay zeka ve Hizmet Olarak Yazılım (SaaS) endüstrilerinde deneyimi olan, Python, LangGraph ve Kubernetes yetkinliklerine sahip, 5-8 yıl arası tecrübeli bir persona matematiksel bir modele dönüştürülür.
+
+### **Faz 4: İş Tanımı Üretimi (Job Description Generation)**
+
+Sistem, önceki fazlardaki yapılandırılmış verileri kullanarak rol özeti, sorumluluklar, temel gereksinimler, avantajlar ve mülakat süreci gibi bölümleri içeren iş tanımlarını otomatik oluşturur. Bu aşamanın en kritik özelliği algoritmik önyargı (bias) kontrolüdür. İlan metnindeki "Rockstar", "Ninja", "Agresif" veya "Genç" gibi kapsayıcılıktan uzak, toksik kültür algısı yaratan veya yaş ayrımcılığına yol açabilecek ifadeler yapay zeka tarafından tespit edilerek düzeltilir.
+
+### **Faz 5: Aday Bulma ve Zeka Katmanı (Candidate Sourcing & Intelligence Layer)**
+
+Geleneksel yöntemler genellikle sadece "Inbound" (Kariyer sayfası, iş panoları vb. üzerinden gelen) başvurulara dayanır. Oysa Talent-Ops, "Sourcing Agent" aracılığıyla çok boyutlu bir "Outbound" stratejisi yürütür. Sistem; LinkedIn, GitHub bakımcıları (maintainers), Kaggle yarışmacıları, StackOverflow yanıtlayıcıları, araştırma makaleleri (Research Papers) ve konferans konuşmacılarını tarar. Ajan, /source AI engineer komutunu aldığında, yalnızca aktif iş arayanları değil, alanındaki en iyi pasif yetenekleri de bulur.  
+Toplanan tüm bu veriler "Candidate Intelligence Layer" (Aday İstihbarat Katmanı) havuzunda birleştirilir. Sistem, bir PDF özgeçmişi veya DOCX belgesini ayrıştırır (Parse), veriyi normalize eder, yetkinlikleri çıkarır, kanıtları (evidence) eşleştirir, skorlar ve veritabanına depolar.
+
+## **Kanıta Dayalı Ön Eleme ve Vektör Tabanlı Skorlama Motoru (Evidence-Based Screening)**
+
+Anahtar kelime (keyword) eşleştirmesine dayalı geleneksel ön eleme sistemleri yetenekleri anlamakta kördür4. Örneğin, adayın CV'sinde "LangGraph" yazdığında ATS sadece kelimenin varlığını kontrol eder. Talent-Ops içindeki "Screening Agent" ise kanıt arar. Adayın GitHub deposunda bu teknolojiyle yazılmış bir kod var mı? Konuyla ilgili bir blog yazısı yayımlamış mı? Bu teknoloji üretim ortamında kullanılmış mı? Sistem, beyanın (claim) ötesine geçerek bir "Güven Skoru" (Confidence Score) hesaplar.  
+Bu mimari, Boolean aramalar yerine "Vektör Tabanlı Yetkinlik Mesafesi" (Vector Space Skill Distance) algoritmalarını (Node2Vec, GraphSAGE vb.) kullanır4. Yetkinlikler sürekli bir vektör uzayında temsil edilir. Adayın sahip olduğu yetkinlik kümesi ile işin gerektirdiği yetkinlik kümesi arasındaki benzerlik Kosinüs Benzerliği (Cosine Similarity) kullanılarak hesaplanır4:  
+![][image2]  
+Bu formülasyon, "Kısmi Puanlama" (Partial Credit) yapılmasına olanak tanır4. Örneğin, ilanda "Tableau" isteniyorsa ancak adayın sadece "PowerBI" tecrübesi varsa, geleneksel ATS bu adayı eler. Ancak vektör uzayında bu iki yetenek "İş Zekası" kümesinde birbirine çok yakın komşulardır ve sistem adayın bu yeteneği hızla öğrenebileceğini öngörerek adayı yüksek skorlar4. Aday Skorlama Motoru beş katmandan oluşur:
+
+1. **Katman 1 \- Sert Filtreler (Hard Filters):** Çalışma izni, lokasyon, asgari dil seviyesi.  
+2. **Katman 2 \- Yetkinlik Eşleşmesi (Skill Match):** Vektör tabanlı teknoloji ve araç uyumu (örn. Python: 9, Docker: 8).  
+3. **Katman 3 \- Deneyim Eşleşmesi (Experience Match):** Talep edilen süre ile adayın sektördeki derinliğinin kıyaslanması.  
+4. **Katman 4 \- Kanıt Eşleşmesi (Evidence Match):** CV'deki yetkinliklerin dış veri kaynaklarıyla (GitHub vb.) teyit edilmesi.  
+5. **Katman 5 \- Davranışsal Sinyaller (Behavior Signals):** Açık kaynak topluluklarındaki liderlik, konferans konuşmaları, sorun çözme hızı.
+
+## **Yapay Zeka Mülakat Ajanı ve Yapılandırılmış Karar Motoru (AI Interview & Decision Engine)**
+
+Özgeçmiş ayrıştırma ve istihbarat aşamasından sonra devreye giren "AI Interview Agent" (Yapay Zeka Mülakat Ajanı), özgeçmişteki eksik veya çelişkili bilgileri toplamak üzere asenkron diyaloglar yürütür. Adayın CV'sinde Kubernetes yazdığında ajan yüzeysel bir onaylama yerine "Üretim (Production) ortamında kaç node yönettiniz ve en büyük darboğazı nasıl çözdünüz?" şeklinde derinlemesine sorular yöneltir. Bu iletişim tarzı, hizmet odaklı sektörlerdeki müşteri etkileşimi simülasyonları gibi gerçek dünya senaryolarını yansıtarak adayın sorun çözme hızını ve iletişim kalitesini ölçer5.  
+Toplanan tüm veriler, "Yapılandırılmış Mülakat Sistemi" (Structured Interview System) ile her rol için özel üretilen puan kartlarına (Scorecards) aktarılır. Teknik yeterlilik (%40), iletişim (%20), sahiplenme (%20) ve kültürel uyum (%20) gibi metrikler standartlaştırılarak tüm mülakatçıların aynı kriterler üzerinden adil bir değerlendirme yapması sağlanır6. Son aşamada "Decision Agent" (Karar Ajanı); özgeçmiş, mülakat notları, referanslar ve yönetici geri bildirimlerini sentezleyerek adayın işe alınma olasılığını, temel riskleri ve nihai öneriyi içeren kapsamlı bir Karar Raporu (Decision Engine Output) hazırlar.
+
+## **Bilgi Grafı (Knowledge Graph) ve Kurumsal İşe Alım Hafızası (Talent Memory)**
+
+Piyasadaki ATS sistemleri "kapanan" ilanlarla birlikte aday verilerini atıl hale getirirken, Talent-Ops reddedilen adayları ve organizasyonel ilişkileri "Talent Memory Agent" vasıtasıyla canlı bir yapı içinde tutar. Bu yapı, statik ilişkisel veritabanları (RDBMS) yerine Neo4j gibi Graf Veritabanları (Graph Databases) üzerine inşa edilmelidir7.  
+Bilgi Grafı; Aday, Şirket, Yetkinlik, İş, Mülakat ve İşe Alım Uzmanı gibi kavramları "Düğümler" (Nodes) olarak; aralarındaki etkileşimleri ise "İlişkiler" (Edges) olarak modeller8. Örneğin, \[Aday\] \-KULLANIR-\> \[Python\], \[Aday\] \-ÇALIŞTI-\> \[Şirket\] veya \[Aday\] \-MÜLAKAT\_YAPTI-\> \[Pozisyon\] gibi anlamsal (semantic) ağlar kurulur8. Bir Bilgi Grafı mimarisi, ontolojik modellemeyle sadece beceri eşleştirmesi yapmakla kalmaz; aynı zamanda adayların oluşturduğu yetenek kümelerini, daha önceki projelerde birlikte çalışmış kişileri ve organizasyon içi referans ağlarını saniyeler içinde haritalandırabilir4.  
+Neo4j ve Büyük Dil Modelleri (LLM) entegrasyonu sayesinde sistem "Sıfır-Kodlama" (Zero-Hardcoding) ile çalışır. Dışarıdan gelen yapılandırılmamış bir veri, sistemin LLM tabanlı profilleme ajanları tarafından analiz edilir, dinamik olarak şemalar (schema) çıkartılır ve Cypher sorguları otomatik üretilerek veritabanına yazılır8. Bu dinamik yapı, yıllar sonra yeni bir rol açıldığında sistemin anında "2026'da reddedilen ancak şu anda tecrübesi olgunlaşmış ve aradığınız becerileri tamamlamış 12 güçlü aday bulundu" şeklinde çıktılar üretmesini sağlar10. Sistemin kısa süreli (konuşma geçmişi), uzun süreli (varlıklar ve ilişkiler) ve akıl yürütme (nedensellik ve denetim) hafızalarına sahip olması ajanların sürekli öğrenmesini garanti eder10.
+
+## **Teknik Entegrasyonlar ve Veri Mimarisi Zorlukları**
+
+Talent-Ops platformunun bağımsız bir sistem olarak çalışmasının yanı sıra, hedef müşterilerin kullanmakta olduğu Greenhouse, Workday veya Lever gibi köklü sistemlerle konuşabilmesi gerekmektedir. Ancak ATS entegrasyonları, yapay zeka ajanları için büyük tuzaklar barındırır.
+
+### **ATS Şema Tutarsızlıkları**
+
+Her İK platformunun veri şeması birbirinden farklıdır. Greenhouse, adayı (Candidate) ve iş başvurusunu (Application) ayrı nesneler olarak ele alırken; CRM odaklı geliştirilmiş Lever, bu iki nesneyi "Opportunity" (Fırsat) adı altında birleştirir11. İşletmelerin kurumsal olarak kullandığı Workday ise SOAP ve REST mimarilerinin karmaşık bir bileşimini sunar ve her müşterinin (tenant) kendi özel alanlarını yaratmasına izin verdiği için standart bir "Workday API'si" fiilen yoktur12.
+
+### **Unified API Zafiyetleri ve Ajan Sınırları**
+
+Bu şema karmaşasını çözmek için piyasaya sürülen "Birleştirilmiş API'ler" (Unified APIs \- örn. Truto, Merge), veriyi tüm sistemler için en düşük ortak paydada (lowest common denominator) standartlaştırmaya çalışır13. Bu düzleştirme işlemi, LLM tabanlı ajanlar için ölümcüldür. LLM'ler (Claude, GPT-4 vb.), eğitim verilerinde Workday'in veya Greenhouse'un karmaşık dokümantasyonlarını orijinal halleriyle öğrenmiştir. Unified API, Workday'deki "Worker" nesnesini "Employee" olarak değiştirdiğinde veya Jira'nın karmaşık JQL sorgu dilini basit metin aramalarına indirgediğinde, yapay zeka ajanı modeli anlamlandıramaz, bağlamı kaybeder ve çalışamaz hale gelir13. Talent-Ops sistemi, bu nedenle Unified API'lere güvenmek yerine, doğrudan orijinal satıcı (vendor) API'lerini esnek bilgi graflarına (Knowledge Graphs) haritalayan akıllı konektörler kullanmalıdır.
+
+## **Hukuki Uyumluluk ve Etik Standartlar: EU AI Act ve GDPR**
+
+Bir işe alım algoritması tasarlanırken, Avrupa Birliği Yapay Zeka Yasası (EU AI Act) ve GDPR gereksinimlerinin sisteme sonradan yama olarak değil, "Tasarım Yoluyla" (by design) entegre edilmesi yasal bir zorunluluktur.
+
+### **AB Yapay Zeka Yasası (EU AI Act) Ek III \- Yüksek Risk Kategorisi**
+
+Adayların işe alımını, özgeçmiş taramalarını veya mülakatlarını değerlendiren tüm yapay zeka sistemleri AB mevzuatında **Yüksek Riskli (High-Risk)** olarak sınıflandırılmıştır14. Yüksek Riskli sistemlerin uyması gereken temel maddeler şunlardır:
+
+* **Risk Yönetimi ve Veri Kalitesi (Madde 9 ve 10):** Algoritmanın cinsiyet, yaş veya ırk gibi korunan niteliklere dayalı önyargı taşımadığını ispatlamak için sürekli bir risk denetimi ve yüksek kaliteli veri seti kullanımı zorunludur15.  
+* **İnsan Gözetimi (Madde 14 \- Human Oversight):** Yapay zekanın tek başına nihai karar verici olmasına izin verilmez. Sistem, alınan kararların (örneğin adayın elenmesinin) nedenlerini insan gözlemcilere "Açıklanabilirlik" (Comprehensibility) ilkesiyle sunmalı ve insan yöneticilerin süreci anında durdurabilmesine veya geri alabilmesine (Intervention capability) olanak tanımalıdır16.
+
+### **GDPR Madde 22 ve Profil Çıkarma**
+
+GDPR Madde 22, bireylerin hukuki etkiler doğuran ve "tamamen otomatikleştirilmiş kararlara" tabi olmama hakkını düzenler18. Özgeçmiş eleme işlemi, eğer bir insan tarafından anlamlı bir şekilde denetlenmiyorsa bu maddeyi ihlal eder20. Talent-Ops, "Görünürde Onay" (rubber-stamping) tuzağına düşmeden, İşe Alım Yöneticisinin yapay zekanın sunduğu kanıtları inceleyerek nihai kararı onaylayacağı "Döngüde İnsan" (Human-in-the-loop) arayüzlerine sahip olmalıdır21.
+
+## **Hedef Kullanıcı: "Talent Operations Specialist" Gerçekte Ne İstiyor?**
+
+Kullanıcı sorgusunda belirtilen LinkedIn ilanı (ID: 4408666454), "Coalition" adlı küresel şirketin açtığı "Talent Operations Specialist" (Yetenek Operasyonları Uzmanı) pozisyonuna aittir23. Bu ilan ve pazar genelindeki benzer Ivanti, Turing veya BigR.io ilanları analiz edildiğinde24, organizasyonların işe alım süreçlerinde ciddi operasyonel tıkanıklıklar yaşadığı net olarak görülmektedir.  
+İlgili ilanda şirketin uzmandan beklediği temel görevler şunlardır:
+
+1. **Mülakat Orkestrasyonu:** ABD ve Avrupa gibi farklı zaman dilimleri arasında adaylar ve yöneticiler için mülakat takvimlerini koordine etmek ve çatışmaları çözmek23.  
+2. **Sistem Bütünlüğü (ATS Maintenance):** Greenhouse ve Workday gibi sistemlerde veri bütünlüğünü sağlamak, eksik girişleri tamamlamak ve pürüzsüz geçişleri yönetmek23.  
+3. **Sorun Çözümü (Triage):** İşe alım operasyonlarıyla ilgili Jira biletlerini (ticket) sınıflandırmak, süreç tıkanıklıklarına hızlı çözümler bulmak23.  
+4. **Araç Geliştirme:** Yapay zeka destekli planlama ve işe alım araçlarını deneyerek sürece entegre etmek ve operasyonel verimliliği artırmak23.
+
+**Talent-Ops'un Bu Roldeki İşlevi:** Talent-Ops yazılımı, bu pozisyondaki bir personeli gereksiz kılmaz; aksine bu çalışanı bir "veri girici" ve "takvim planlayıcı" olmaktan çıkarıp, stratejik bir "Yetenek Mühendisi"ne dönüştürür. Sistem otonom ajanlarıyla zaman dilimi hesaplamalarını, mülakat planlamalarını ve ATS veri hijyenini arka planda hallederken; Yetenek Operasyonları Uzmanı, adayın organizasyon içindeki yolculuğunu (Candidate Experience) iyileştirmeye, Bilgi Grafları üzerinden veri modellemeye ve işveren markasını güçlendirmeye odaklanır.
+
+## **Başarı Metrikleri ve Gelişim Yol Haritası (MVP Kapsamı)**
+
+Bu kompleks yapının hayata geçirilmesi için modüler bir ürün geliştirme yaklaşımı (MVP) izlenmelidir:
+
+* **v1 Kapsamı:** Rol oluşturma, otonom İş Tanımı (JD) üretimi, vektör tabanlı özgeçmiş ayrıştırıcı, kanıta dayalı aday skorlama, temel mülakat kiti ve yönetici panosu (dashboard).  
+* **v2 Kapsamı:** LinkedIn ve GitHub zeka katmanlarının eklenmesi, Yetenek CRM'i ve Bilgi Grafı tabanlı reddedilen adayların yeniden keşfi (Candidate Rediscovery).  
+* **v3 Kapsamı:** Tam otonom işe alım uzmanı (Autonomous Recruiter), otomatik mülakat planlama/takip ve kurumsal yetenek haritalama sistemleri.
+
+Sistemin başarısı üç farklı kategorideki metriklerle ölçülmelidir:
+
+1. **İşe Alım Metrikleri:** İşe alım süresi (Time to Hire), ön eleme süresi, mülakatın teklife dönüşme oranı ve teklif kabul oranı.  
+2. **Yapay Zeka Metrikleri:** Ön eleme hassasiyeti (Precision) ve geri çağırma (Recall), aday eşleşme doğruluğu ve modelin halüsinasyon oranı.  
+3. **İş Metrikleri:** İşe alım başına maliyet (Cost Per Hire), işe alım ekibinin verimlilik artışı ve İşe Alım Yöneticisinin memnuniyet skoru.
+
+## **Uzun Vadeli Vizyon**
+
+Sonuç olarak, geleneksel işe alım operasyonları büyük oranda zaman israfı, manuel eşleştirmeler ve anlamsal bağlamdan yoksun kelime aramalarına dayanmaktadır. Career-Ops, adayların pazarda kendilerini konumlandırmaları için ne kadar kritikse; Talent-Ops da şirketlerin doğru yetenekleri çekmesi, değerlendirmesi ve bünyesine katması için o kadar kritiktir.  
+Talent-Ops projesi salt bir Aday Takip Sistemi (ATS) veya basit bir Müşteri İlişkileri Yönetimi (CRM) platformu değildir. O; çoklu yapay zeka ajanlarıyla orkestre edilen, Bilgi Grafları ile organizasyonel hafızayı yaşatan, AB Yapay Zeka Yasası ve GDPR kurallarına by-design uyumlu çalışan ve yetenek verisini kanıta dayalı matematikle işleyen otonom bir **Yetenek Zekası Platformu** ve Kurumsal İşe Alım Hafızasıdır.
+
+#### **Alıntılanan çalışmalar**
+
+1. The Hidden Cost of Manual Recruiting Coordination \- NinjaHire, [https://ninjahire.co/thoughts/the-hidden-cost-of-manual-recruiting-coordination](https://ninjahire.co/thoughts/the-hidden-cost-of-manual-recruiting-coordination)  
+2. Why Your Best Recruiters Burn Out (And It's Not the Workload) \- Automindz Solutions, [https://automindz-solutions.com/blog/why-your-best-recruiters-burn-out](https://automindz-solutions.com/blog/why-your-best-recruiters-burn-out)  
+3. Recruiter Productivity: The Real Reason Recruiters Waste 60% of Their Week (And Why It's Costing Staffing Agencies Growth) \- Aqore, [https://www.aqore.com/recruiter-productivity-staffing-agencies/](https://www.aqore.com/recruiter-productivity-staffing-agencies/)  
+4. Knowledge Graph AI for Fair Recruitment | Veriprajna, [https://veriprajna.com/technical-whitepapers/recruitment-ai-fairness-knowledge-graphs](https://veriprajna.com/technical-whitepapers/recruitment-ai-fairness-knowledge-graphs)  
+5. 10 Best Candidate Assessment Tools for Hiring | PMaps, [https://www.pmapstest.com/blog/top-candidate-assessment-tools](https://www.pmapstest.com/blog/top-candidate-assessment-tools)  
+6. Vibe Coding for Recruiters: Build tools with AI, [https://recruit2.com/vibe-coding-recruiters/](https://recruit2.com/vibe-coding-recruiters/)  
+7. Introducing Neo4j Agent Skills. Teaching agents the latest Cypher and… | by Tomaz Bratanic \- Medium, [https://medium.com/neo4j/introducing-neo4j-agent-skills-e69958c38dea](https://medium.com/neo4j/introducing-neo4j-agent-skills-e69958c38dea)  
+8. Building a Fully Agentic Employee Knowledge Graph: OrgGraph AI — using LangGraph & Neo4j | by Shubham Shardul | Apr, 2026 | Medium, [https://medium.com/@shubham.shardul2019/building-a-fully-agentic-employee-knowledge-graph-orggraph-ai-using-langgraph-neo4j-470be70bb31c](https://medium.com/@shubham.shardul2019/building-a-fully-agentic-employee-knowledge-graph-orggraph-ai-using-langgraph-neo4j-470be70bb31c)  
+9. Knowledge Graph For Skill Development \- Meegle, [https://www.meegle.com/en\_us/topics/knowledge-graphs/knowledge-graph-for-skill-development](https://www.meegle.com/en_us/topics/knowledge-graphs/knowledge-graph-for-skill-development)  
+10. Meet Lenny's Memory: Building context graphs for AI agents \- Neo4j, [https://neo4j.com/blog/developer/meet-lennys-memory-building-context-graphs-for-ai-agents/](https://neo4j.com/blog/developer/meet-lennys-memory-building-context-graphs-for-ai-agents/)  
+11. How to Integrate Multiple ATS Platforms (Greenhouse, Lever, Workable) | Truto Blog, [https://truto.one/blog/how-to-integrate-multiple-ats-platforms-greenhouse-lever-workable/](https://truto.one/blog/how-to-integrate-multiple-ats-platforms-greenhouse-lever-workable/)  
+12. Workday API Integration: What to Know Before You Build | Unified.to, [https://unified.to/blog/workday\_api\_integration\_what\_to\_know\_before\_you\_build](https://unified.to/blog/workday_api_integration_what_to_know_before_you_build)  
+13. Unified API Limitations for AI Agent Integration: 7 Ways They Break \- StackOne, [https://www.stackone.com/blog/why-unified-apis-break-for-agents/](https://www.stackone.com/blog/why-unified-apis-break-for-agents/)  
+14. High-risk use cases under EU AI Act | AI Governance Lexicon \- VerifyWise, [https://verifywise.ai/lexicon/high-risk-use-cases-under-eu-ai-act](https://verifywise.ai/lexicon/high-risk-use-cases-under-eu-ai-act)  
+15. EU AI Act high-risk AI systems: classification guide for compliance teams \- Cognisys, [https://cognisys.co.uk/eu-ai-act-high-risk-systems-how-to-classify-your-ai/](https://cognisys.co.uk/eu-ai-act-high-risk-systems-how-to-classify-your-ai/)  
+16. EU AI Act High-Risk Requirements: What Companies Need to Know \- Dataiku, [https://www.dataiku.com/stories/blog/eu-ai-act-high-risk-requirements](https://www.dataiku.com/stories/blog/eu-ai-act-high-risk-requirements)  
+17. EU AI Act High-Risk Compliance: A Technical Readiness Guide for August 2026, [https://www.mckennaconsultants.com/eu-ai-act-high-risk-compliance-a-technical-readiness-guide-for-august-2026/](https://www.mckennaconsultants.com/eu-ai-act-high-risk-compliance-a-technical-readiness-guide-for-august-2026/)  
+18. Art. 22 GDPR – Automated individual decision-making, including profiling \- General Data Protection Regulation (GDPR), [https://gdpr-info.eu/art-22-gdpr/](https://gdpr-info.eu/art-22-gdpr/)  
+19. Rights related to automated decision making including profiling | ICO, [https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/rights-related-to-automated-decision-making-including-profiling/](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/rights-related-to-automated-decision-making-including-profiling/)  
+20. AI Recruitment in 2026: GDPR & Discrimination Risks \- DavidsonMorris, [https://www.davidsonmorris.com/ai-recruitment/](https://www.davidsonmorris.com/ai-recruitment/)  
+21. How to Ensure AI Recruiting is GDPR Compliant: A Practical Guide \- everworker.ai, [https://everworker.ai/blog/ai\_recruiting\_gdpr\_compliance\_guide](https://everworker.ai/blog/ai_recruiting_gdpr_compliance_guide)  
+22. Helping Hand Or Complete Control? AI In Recruitment In The EU And UK | Insights, [https://www.ropesgray.com/en/insights/viewpoints/102mpug/helping-hand-or-complete-control-ai-in-recruitment-in-the-eu-and-uk](https://www.ropesgray.com/en/insights/viewpoints/102mpug/helping-hand-or-complete-control-ai-in-recruitment-in-the-eu-and-uk)  
+23. Talent Operations Specialist \- Coalition | Built In Boston, [https://www.builtinboston.com/job/talent-operations-specialist/8408381](https://www.builtinboston.com/job/talent-operations-specialist/8408381)  
+24. Talent Operations Specialist @ Ivanti | TA Associates Job Board, [https://careers.ta.com/companies/ivanti/jobs/59761559-talent-operations-specialist](https://careers.ta.com/companies/ivanti/jobs/59761559-talent-operations-specialist)  
+25. Talent Operations Specialist \- Turing Careers | Grow With Us, [https://careers.turing.com/job/5494224004](https://careers.turing.com/job/5494224004)  
+26. US Talent Operations Specialist \- BigRio, [https://bigr.io/us-talent-operations-specialist/](https://bigr.io/us-talent-operations-specialist/)
+
+[image1]: <data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAZCAYAAAA4/K6pAAAAkklEQVR4XmNgGHHgDboAKSADiG3QBUkB/9EFSAGVQGyCLkgK+IcuQAroAGItdEFSwG90AWxgMQ58E4jXAPECIJ4HxHOBeDYQs4N1EQG+owuQApYCsRi6IC7QhQX/wCIGw3wQbbjBZgYiFOEDz9EFSAEHGUgIZWzgNroAKeAcEDOhCxILQBpPoguSAtrRBUYBcQAAObwbz25JdhwAAAAASUVORK5CYII=>
+
+[image2]: <data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmwAAABkCAYAAAA7WWxhAAASRUlEQVR4Xu3dB7A8WVXH8UNGSSK6IiC7pCIpggsSiqWIC4KA5FjuugRFQQSVkuT/X8CSo6CCKLssC5bkIldRsKuISGYRI8L+CQosCkoGY/+4fXbOnHe7p3umZ97M+38/Vbde9709PT0986bP3L7BDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgdq327wWadO9YAAAAgP130SYd06S/a9IJbd7/zYoBAACwCgVWy6QX6cGtp7R/Tw15mw7YfjBnAABwNPuPJt0lZ67oiU36Skr/3qbzmvTRJv3O+VtjSudaCa5engs6PMhmQVt0jSZdpF2+YpO+F8rW7ZNN+nrOXODDTfpYk85p/+oz9qEmva9JTwvbAQCwc25t9Yv1VB5l9f1fIuR/J5VhdWdZObcKWIb6eJN+I6x/Piz/b5Mu26Qbh7x1eaXVPzNDvNTqj1MbvFo+AAA7QbUmfnE8JZVNoStgk+9adxlW5+f253JBj/hexOWnN+mDYX1dLtikr9nynwsFll2PU/5tciYAANtOF0ddxL7V/u260K2iL2D7hHWXYXUXt907v//WpAvb8setx+j2e3ZnW25/AADsuzc06b+bdLzNLpCXnNtidX0Bm+f/Ty7AZB5q5Rxv4lbmFF7d/tXnsvaZ6XMZK4+Jt3XFf5g8POUDALATdBG7U1hWGtPmaYgYsOlC+ugmPS/kvW62KdbkiI0PfvZDHOtNw4mMPeZnW3mMOktcvUnXsRIAKu8ZYTsAAHbGG63UYjgPoJSG1rK9JGdU9NWwfdtKvtqyYb38PdD4atvoKk16a1h/mdU/M/LnOaPV9Tk72+r5XfsBAGBr6AJ217D+gDZPaUgt2w2tbPuTuSDpC9gubd1lmJaGbdF5VqP8baRjUy/VD1jp3PDFNm8Mbf+mnNlS2dAfIgAAbAX1GvRAqSsN8cc5o6IvYBMvu1cuwOR0njXN1Cb8UM7o8dtNOinlqTdn7TMTf2REd7Oy/Y1yQeNCVsquEPK69gMAwNb4L5u//eTea/3B1TL6ArbYG1BtjrA+/2LzActQem/GBF9qn/iZJj0zF/So1frpWPNn5j+bdPmU57zHcc2ZNl/Wtx8AwBJOzBlb5Mdzxg64T5Pub+Xipb+3D2WqcbhfW6b05ibdt0nXD9uMcT0rz3eGzfapde1TI+srYPT82gUb09EYaps2JGC7g5X3/ydyQeNHrJTl6alqgyx7L1AFYtFN23yl/P9a2w8AnE9fLOop91s2+9X6hFnx2qnB8XVz5pb6FVs8dZHGmfr5nLlBahi9SzTemmpaPmeljdBHQtm/NunLoVx/ta6ed8t4qs0uljEwU+2eOhtocFQ1+o5BI6Z3CyuN7oe6WVj+VJP+JKyPsShg+wMr46UpyNJnIgZUGuZF06VpGjN9VuKUWPocRaoV1vb5s6YONZqq6o6zTefk/QDAHH3xKGBSek2T/rFJfz+3xbS//OK+HmuzL7Op/JOVeSGnpl/cCiAW8YbJJ+SCEfIXfVfS7btMDaRVUwVsI/0orA0i20U/6L7ULqvGVW2/4hh5z0/puU16TpOeZXtryZQ3tcNWpp56d8of67BNsx8AB1Rt6IKTbD5g84azU3S9r+2rr6v8MjyYyWp5Y+jxqj1bxJ9/ikmpfV8vTPk+QnrXa+rKB/bb2M+mtr9VytMt7GUokJuaAlDV/K5qqv0AOKC6vjxzDZvabkwl70u3IbqOYxm6xfsDOdNWf45acJv9ns0CKSUdyyq6AjbxMj1ndsTqjwH2k2rGhv5PXNVKbXz+v82DzT6mJ+UaNtW+AcBO0pfhI3KmLd9GZBkvsL1fylNTe5RVnkPnSO1uFtFz6NayB1NxENhlDAnYfiEXNC5nq71eYGr+eR2b8mdfeUOGbonU2USdCdS2bNkOKwCwrz5tsy/GVzXp2Pni7/Ny51OtKF3ESqNt1cj5Nmo/pcbbakyu9mRR3pfUAjat65f0i9rl94cytQ3z/WhcJDVC1vLPhvy4v5gXy7w3mKcrtfl5O9GUNEP4Y2r7WIbvI1+0/qrNV3u1Liq/bM4EAAC7KQYXXUFGV55G/3bqPakefBoA1Wmb/Is276srYItz+OVyUZ4HUlp+crusAS/z9l2vS5R/7bCu9nW51rHrsZGGhXhIu3zI+p9zKN9HLZ0WtqvRNmrr1ufcEelH28cAAIB9osm2FXx5MPCW+eJq4JHzNB1QztP671byolrA9sC0rvI89Ifyjk154uN2Rf66ah5mJdB0dw/LruuxUd7Gn/NQyh/D95Fr2DQOlJddLJU5lWmolk3z4zpa0yIa9+0VHel0K4G4miTotl/Xexvl5yeRNpkAbEisDXM+4GOU1yXnaVT4nKf1J1XyolrApkBDebql+stWbrveYG6LvY9xCrhy2aIvF5WpkbMvZ7W8SLVr2uabbVIPUX/ORY/t44/PAZvcw/r3r/x19IoDAAAbdiRntHIQkNcl512tkqf1sQGbTw0Uh/5Q4/2fCeuS9+N86JAoBjZ6vkxlGmNNAawmHM/y/jKVv61Jp6Tkz3totuko/vhawBbn3qxR/q/nzEQDiQ5NmhQdAADsg76Lfd+65LyuGjZvWxbzoj9Mebod9NmwLio/3uYDzLwf5zVPUQxs3hALWqdZKe/q1Zn3F/ntyZrYqSPT0COPzJmJP7YWsP2Dde9blB9HiMd20K1PDREzJOVhKQAARyld1B+a8lQroxkIIm2Xa1hyoKDgIOdpXQFZzov7+rM2z2k08ziP4zWtDMuhQCyOhabHaNTzTLdQ83G8PeTlMqf8v86ZLfWgrQ0crAE8z7Hy2DyYp9oqaSwoD6p0nrWNz07g+erdmumxSr7NO9p11f7p9X0+lHVd1Lte5yZdJyxraIUpxR6wXWN7xfH49DmaSpwUPv9f7Br93x45StMUNHvCkaM4AdgQBRtPs9nFXylOHaXgQnPnaR5HTbl0hpV2UVr2PNWg6TG6pahAwhvwf7XdRnmam6+2Lz1W5UqafkZzmoq28ePxPAVxGvFc46Gd126j5/xGWy46ji+0Zdqf2pY5D3Jy5wWnYPCSObN1XJN+M2fa7Lni63Y6Fh2Dyv1YdU78OdTWTiObv7xdj+L74Um1fzpGDZeiOQ3/9Pyt9zrRtiNgU3s+N/R4hk6r9a6wrI4meUBmUY9h94mwvKo4NdJLwvIuyoNkYxwNKwQAWDNN5i4XsDLpd5+hAccYt7f5IUWmomO9VM7cB6oZdUPO36LbvNFZYfkXbTaOXvT4sPzPYVnUO/i1Nns+rSv9ms2PNXg7f0AQj09Tq+0qtS9Vze1UVAt9jJXz43PpDnkv1+nYJj3V6m1sV5WbbqxKP041VNH7rdTcqoY43m3YL/rBfQUrPZenPocAsNCNrXz5nGSl9qXrtppTLVq+7bmqdXz5/ZSVmrxtENsEDnmtHiQpqW1gn7PD8slWvzX8hLBcqwl5lM2eL7ujdZfFvNPD8q6JwUA892OTe0r7N+bF5U3It6hVG+qBu2q0PxzKVnHFJn0orOdzMjRdXg9uqX2t8jSvqKg2ftPnrybexdDx0PscwMbpy0ftw26eCzpM+eX5uCZdOWdOYMpjXFUOCProfMQL2Qfmi/eINaK/ZHvPpWpN4xiA6gCS9QVs4mV9PZRrt7R3RTw/l7Hyuoa+HjU3qJ27a9jsVriCGg1xsylqZpGPRz2c79Iun2Xztb6rONPmfyT4uehqchHpx+EfWdn+46ksHr9ut6u2dx0UuH4spI9aCUDf16Rbzjb7vveEZTXLWHQ3AgD2nYIAtSHbVrpAxob2+y1efPKFNFO5Agi/8C3a/i/CsoZQyQGbLoqHwvrYgM1rN2plMU9Bwi7SQNeZv14FXUP9pZXboO6VNqvR0mDcqpVWQL1uer+73i+nsnvmzCXlHxSaCWTR89fk7WvtPuP5ndKjbe/za7pB5cXjiFRWq80GAOyweDHIF4bMy9WbdsiFLwZsqu05NqxLDtjODcsuBmxqP6QLmG6jqr2b8l4323ROPLZXhOVd8smc0fLzURtUu0vX+/x0K0FbV2eeKflxd31u1M5RP7imoM5ENR7sdB1DjXo7vzqsxx7Ieo9qPzSmohpwfeYzBaN6DbdJ+ZusLQUAbFDXhTxTe7FDYd0ven09MIcEbIfD+rlh2cWATYGa0uEmndrmfdtKD+EsvpZdDNhebHvPl7u4zc7Jonad20I9ho+z0vu89jn7aZt1MMqdT5bR11FDQ+/oGG6Z8rdR13vs73+kHv7u9WEZAHAAxC/9fAGI8oDFus1Wu2hEUwdsNV52rUq+27WATcPrqNdfH6/lnKq917odaf++2/a+lz9sJcA42UoP4HfOlY53XJN+LGcmmlIvH8e28TaLmd9afnjI+7qV86db2xqnM/a+BgAcAEMCNr9A+DysatSsWzUeLOUG/26TAVsuj+u7FrDpgqtBqBc5Yntf9zaK7/vvWznma4a8+B4qPSKULUM9TYfQc8UxLbeND12j4U50G1aDXOvWrPK8l6rL51A90QEAB0i84Hdd/DWUgYZeOCUlvzh8bbbpnByw1TodHA7rtbZABzFgUw1an1yb2UevMw7psI3ie6F2iFqfqmNBpnETNbzPEBooW8fy0lywJfQ/p+O7rZW2avqrqfKUd4mwHQDgKLAoYPPatQvlApvN0ap0g1QmMWBTgJd7rmnfh8L62HHYbmqzMl2oo7j9GWF5vy26FaeBT+OUXkNof3F4lm2iGT/+xkrHBjWUVyN9HW+eDm+Iq1jpAa6e1l3G9hDXVHc6nhfkgi2g43pTzmypbBMdRQAAWyIGD3FZ4955MFQLmLzxeE5RDtjyTAc5YMuNzfO+u9Kd/QFBPJZtCdhUg6jANp8np1kIhtYORdrfVL0rp6Q5eE9Leapd1PG+N+VL32vQ7UA9Rg3rFfTW3MhKO64x1IFDHVe2zd2snCe9pkw/nlSmmQ0AAEeJWDPTFUgsKw+cm2tG8sC5XcNYLCO+lqEDza7bxdq/amP15FjQUg/YG+bMBXRON3nhVoAzVNfnSflqJJ91bS8ezB1n3dupbeVYXftapC+4nIJmduk6tjNtb5nG1ov/bwCAAyZOkp4vAquKF5CTbX6KH9FF74lhXfOUTiW+ltPD8ja4k5WAJbdlU63lGDp/8f0b4yG2t+F6n+c16TM2/DPy5ibdK2e2tI+h+6nRY/MtzAda/1AeNapZGxOARmOP/2VWHrNoOjfXdY7ubyU/Ny8AABxwcViI2gViFWeHZQ2KqpHmszj8wN+G5VXF16KL5bbR8R2f8sbWlE39fg2x6DnVzkzt1jzgODGUvd3KHLpepiE+3F3D8iIKtPIAsV0dX7pcyuozSazTkIDt7CZ9zsq26nyi4XN0nt7T5ikp2M7yjyEAwAETG2kvuhiPpTlg3f2s3rPtMWFZDdOnEodr6Bvcd7/kAWTHBKuqGftKzlwgjvyvzh3LdlKY+jMip1lph6i5ModQW0gdxwtD3k3C8iIPszK8yFCquYtjnum9unZYH2pIwLYMnb91vC8AgC2i4QJcrfH+Kq4flrsuVLFH5AlheVV3CMvbePtINU+6yB5u18+ZFS009uKsC/qt2mXVZKnReqyhen5Kz23Sc5r0LNt77sY+91AKsHMbxz5e2ySaJH0oBVpjgmOJr/kjVs6NbhGLBv3tOn+a1D7Sfmo/Wqaw7K1xAADQQwGsGskfsTJO3PXmSrvpwqzetUNc1UogVAuyanlDLPu4Rcbu98FWHqOOGkNvh6oX7piBcn0KqxwMjT1Wp8fpVuw6qAYbAACsgcZc00V86O3JY6zMNPFlK7c4v2Clx6mGAtEgsMpT8OK1TzFFz7D528S6Ld2VNlHDdtjK4LW3SPl9FLTqXCiY0vAhQ+jYNSyIzp9uSfu5U9K5PK/dJidNlxXFAE41ZvmcxRRpX5dOeVM43P6NbQIBAMCEdBFftqfisvScQ2vpnGoAdZtZj423uqeyzD5VA7bqvKPL0JhwGnZjDB9/71etTHQ/NQXzAADggLl6zsBgQ2v0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsJr/B6zBpnqRG1IxAAAAAElFTkSuQmCC>
