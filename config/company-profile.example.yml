@@ -1,0 +1,31 @@
+# config/company-profile.example.yml
+# Copy to config/company-profile.yml and edit. The real file is for YOUR
+# private fork — never commit real company/candidate data to a public repo.
+
+company:
+  name: "Acme GmbH"
+  mission: "One sentence on what the company does."
+  values: ["evidence over opinion", "candidate respect", "transparency"]
+  locations: ["Brussels (hybrid)", "Remote EU"]
+
+user:
+  # Provenance stamp for every human-recorded action: decided_by: human:<id>
+  id: "your-name"
+
+language: en
+
+jd:
+  tone: "direct, concrete, no buzzwords"
+  include_comp_band: true
+
+comp_bands:
+  # role-family: "min-max currency"
+  hr-tech: "55000-75000 EUR"
+
+disclosure:
+  # Set to false only if you maintain your own disclosure text in the JD.
+  include_default_block: true
+
+retention:
+  # GDPR hygiene defaults used by talent memory and forget.mjs messaging.
+  candidate_data_months: 12
