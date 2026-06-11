@@ -40,7 +40,8 @@ Invocation: /talent-ops triage <role-slug>
    equality). Move tracker stages per the states.yml decisions mapping,
    update updated_at.
 7. Strong-but-rejected (total >= 3.5, or the user says "good, but"):
-   append a talent memory entry (format in modes/memory.md).
+   append a talent memory entry (format in modes/memory.md). Ask
+   contact_ok first (recontact consent — if unknown, write no).
 
 ## Failure modes
 - Rejection without reason_code -> refuse that item, list valid codes.

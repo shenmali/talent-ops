@@ -17,7 +17,8 @@ Invocation: /talent-ops decision <role-slug> <candidate-slug>
 2. Ask the user for: decision (a key of states.yml decisions),
    reason_code (REQUIRED for hired/rejected/withdrawn), reason_detail,
    future_fit, recontact_after (default +6 months; fill only when
-   future_fit is non-empty — mirrors the template).
+   future_fit is non-empty — mirrors the template), and contact_ok
+   (recontact consent: yes/no — if unknown, write no).
 3. Validate against templates/states.yml. Write decision.md from the
    template: decided_by: human:<user.id from config/company-profile.yml>,
    override per the alignment table in _shared.md §Override (never
