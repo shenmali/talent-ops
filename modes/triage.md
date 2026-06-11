@@ -19,17 +19,22 @@ Invocation: /talent-ops triage <role-slug>
    during calibration: that is a contract revision -> drift log entry,
    status: revised, re-approval required, then re-score (batch) before
    continuing.
-3. Render the queue, one line per candidate:
-   `<slug> | <total> (<confidence>) | <one-line fit reason> | missing: N |
-   <recommendation>`
+3. Render the queue, one numbered line per candidate:
+   `<n>. <slug> | <total> (<confidence>) | <one-line fit reason> |
+   missing: N | <recommendation>`
 4. Accept bulk decisions FROM THE USER, e.g. "advance 1,3,5; reject 7,8
-   reason stronger-shortlist". Every rejection requires a reason_code
+   reason stronger-shortlist". Map user shorthand to decision values from
+   states.yml: "advance" -> `advanced`, "reject" -> `rejected`,
+   "withdrew" -> `withdrawn` — never write the shorthand itself. Every
+   terminal decision (rejected, withdrawn) requires a reason_code
    (validate against templates/states.yml). The agent RECORDS the human's
    decision; it never decides. decided_by: human:<user.id from
    config/company-profile.yml>.
-5. Anti-miss check BEFORE writing rejections: pick max(2, 10%) random
-   candidates from the reject set; show each one's fit reason + strongest
-   evidence; ask "confirm these too?". Only then write.
+5. Anti-miss check BEFORE writing rejections: pick max(2, 10%)
+   candidates spread across the reject set's weighted_total range (e.g.
+   one from the upper reject band, one from the lower — not just the
+   top); show each one's fit reason + strongest evidence; ask "confirm
+   these too?". Only then write.
 6. Write decision.md per decided candidate (from the template; override =
    decision != recommendation). Move tracker stages per the states.yml
    decisions mapping, update updated_at.
