@@ -22,4 +22,23 @@ describe('findDuplicates', () => {
     })
     expect(findDuplicates(root, 'r')).toEqual([])
   })
+
+  it('groups candidates sharing a normalized name with different emails', () => {
+    const root = makeRepo({
+      'roles/r/candidates/jane-doe/profile.md': '---\nname: Jane Doe\nemail: jd1@x.dev\n---\n',
+      'roles/r/candidates/jane-doe-2/profile.md': '---\nname: jane doe\nemail: jd2@y.dev\n---\n',
+    })
+    const dups = findDuplicates(root, 'r')
+    expect(dups).toHaveLength(1)
+    expect(dups[0].key).toBe('name:janedoe')
+    expect(dups[0].candidates).toEqual(['jane-doe', 'jane-doe-2'])
+  })
+
+  it('skips malformed profile frontmatter instead of crashing', () => {
+    const root = makeRepo({
+      'roles/r/candidates/ok/profile.md': '---\nname: OK\nemail: ok@x.dev\n---\n',
+      'roles/r/candidates/bad/profile.md': 'not frontmatter\n',
+    })
+    expect(findDuplicates(root, 'r')).toEqual([])
+  })
 })

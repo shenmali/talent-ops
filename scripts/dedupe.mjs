@@ -1,5 +1,5 @@
 // scripts/dedupe.mjs — duplicate suggestions, advisory only (no auto-merge)
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseFrontmatter } from './lib/frontmatter.mjs'
@@ -9,7 +9,12 @@ export function findDuplicates(root, role) {
   const base = join(root, 'roles', role, 'candidates')
   const groups = new Map()
   for (const f of walk(base).filter((x) => x.endsWith('/profile.md'))) {
-    const fm = parseFrontmatter(readFileSync(f, 'utf8')).data
+    let fm
+    try {
+      fm = parseFrontmatter(readFileSync(f, 'utf8')).data
+    } catch {
+      continue // malformed profile.md is verify.mjs's job to report
+    }
     const slug = f.match(/candidates\/(.+?)\/profile\.md$/)[1]
     const keys = []
     if (fm.email) keys.push('email:' + String(fm.email).toLowerCase().trim())
@@ -28,6 +33,10 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const [role, flag] = process.argv.slice(2)
   if (!role) {
     console.error('usage: node scripts/dedupe.mjs <role-slug> [--strict]')
+    process.exit(2)
+  }
+  if (!existsSync(join(process.cwd(), 'roles', role))) {
+    console.error(`dedupe: role not found: ${role}`)
     process.exit(2)
   }
   const dups = findDuplicates(process.cwd(), role)
