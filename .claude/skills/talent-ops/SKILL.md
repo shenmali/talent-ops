@@ -28,6 +28,10 @@ Determine the mode from the first argument:
 Unknown input that looks like a hiring need ("we need a senior X") =>
 suggest `define-role`. Anything else => discovery.
 
+If a mode with required arguments receives fewer than expected, do not
+guess: report the missing argument and show that mode's usage line from
+the discovery menu.
+
 ## Discovery menu
 
 ```
@@ -45,13 +49,18 @@ talent-ops — Hiring Command Center
   /talent-ops memory [role]          -> Talent memory: rediscover strong past candidates
 
 Flow: define-role -> jd -> (publish) -> intake -> batch -> triage ->
-interview-kit -> decision. Integrity: npm run verify
+interview-kit -> decision. tracker/memory: any stage.
+Integrity: npm run verify
 ```
 
 ## Context loading
 
 - Modes requiring `modes/_shared.md` + their own file: define-role, jd,
   intake, screen, batch, triage, interview-kit, decision.
+  (Note: Guard 1 in _shared.md — the approved-contract gate — applies only
+  to jd, screen, batch, triage, interview-kit, decision. define-role and
+  intake load _shared.md for slug/quarantine/provenance rules and run
+  without an approved contract.)
 - Standalone (own file only): tracker, memory.
 - `batch` delegates per-candidate work to subagents, injecting the content
   of `_shared.md` + `screen.md` into each subagent prompt.
