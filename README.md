@@ -15,7 +15,8 @@ choose candidates *on evidence, not keywords*.
 | `/talent-ops define-role` | Calibration conversation -> approved Role Contract |
 | `/talent-ops jd <role>` | Bias-checked job description from the contract |
 | `/talent-ops intake <role>` | Parse CVs from `data/inbox/` into candidate files |
-| `/talent-ops batch <role>` | Evidence ledger + 5-layer score, all candidates, in parallel |
+| `/talent-ops screen <role> <cand>` | Evidence ledger + 5-layer score for one candidate |
+| `/talent-ops batch <role>` | Same as screen, all parsed candidates, in parallel |
 | `/talent-ops triage <role>` | Ranked queue -> reason-coded human decisions |
 | `/talent-ops interview-kit <role> <cand>` | Interview plan targeting evidence gaps |
 | `/talent-ops decision <role> <cand>` | Decision packet -> recorded human decision |
