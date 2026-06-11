@@ -6,7 +6,7 @@ approved_by: ""          # human:<name> — set only on explicit approval
 approved_date: ""
 location: "<city / remote policy>"
 employment_type: full-time
-comp_band: "<min-max currency, or 'see company profile'>"
+comp_band: "<min-max currency>"   # or "see company profile" if not publishing numbers
 hard_filters:            # pass/fail checks. Failing candidates still need a HUMAN decision.
   work_permit: "<e.g. EU>"
   language: "<e.g. English C1>"
