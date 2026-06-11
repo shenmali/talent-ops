@@ -5,6 +5,8 @@ Purpose: assemble the decision packet and record the HUMAN decision.
 Invocation: /talent-ops decision <role-slug> <candidate-slug>
 
 ## Preconditions
+- Contract approved (`revised` = awaiting re-approval, refuse) — see
+  _shared.md Guard 1.
 - score.md exists. Interview scorecards are optional (decisions can also
   happen at triage); the packet states which inputs were present.
 

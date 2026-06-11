@@ -5,7 +5,7 @@ each check. Re-run after any change to modes/_shared.md or a mode file.
 
 **Setup**
 ```bash
-cp -r examples/role-ai-automation-specialist-hr roles/
+cp -r examples/role-ai-automation-specialist-hr roles/ai-automation-specialist-hr
 cp examples/inbox-samples/* data/inbox/
 cp config/company-profile.example.yml config/company-profile.yml
 ```

@@ -27,7 +27,7 @@ choose candidates *on evidence, not keywords*.
 ```bash
 git clone <this repo> && cd talent-ops && npm install
 cp config/company-profile.example.yml config/company-profile.yml  # set user.id
-cp -r examples/role-ai-automation-specialist-hr roles/
+cp -r examples/role-ai-automation-specialist-hr roles/ai-automation-specialist-hr
 cp examples/inbox-samples/* data/inbox/
 # then, in Claude Code (or any AGENTS.md-aware CLI):
 #   /talent-ops intake ai-automation-specialist-hr
@@ -36,7 +36,7 @@ cp examples/inbox-samples/* data/inbox/
 npm run verify   # integrity: human-only decisions, reason codes, tracker consistency
 ```
 
-## Hard rules (enforced three times: modes, board, verify)
+## Hard rules (enforced in the modes and by `npm run verify`)
 
 1. No autonomous rejection — `decided_by` is always `human:*`.
 2. Terminal decisions carry a `reason_code` from `templates/states.yml`.

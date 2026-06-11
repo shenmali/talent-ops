@@ -11,12 +11,6 @@ function writeAtomic(path, content) {
 export function forgetCandidate(root, role, slug, { dryRun = false } = {}) {
   const result = { removedDir: false, trackerRows: 0, memoryEntries: 0, batchRows: 0 }
 
-  const dir = join(root, 'roles', role, 'candidates', slug)
-  if (existsSync(dir)) {
-    result.removedDir = true
-    if (!dryRun) rmSync(dir, { recursive: true })
-  }
-
   const trackerPath = join(root, 'data/tracker.md')
   if (existsSync(trackerPath)) {
     const kept = readFileSync(trackerPath, 'utf8').split('\n').filter((line) => {
@@ -58,6 +52,14 @@ export function forgetCandidate(root, role, slug, { dryRun = false } = {}) {
       return !match
     })
     if (!dryRun && result.batchRows) writeAtomic(batchPath, kept.join('\n'))
+  }
+
+  // Remove the candidate dir LAST: if an earlier write failed, the
+  // recoverable artifact (the dir) is still intact.
+  const dir = join(root, 'roles', role, 'candidates', slug)
+  if (existsSync(dir)) {
+    result.removedDir = true
+    if (!dryRun) rmSync(dir, { recursive: true })
   }
 
   return result
