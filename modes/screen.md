@@ -29,11 +29,17 @@ Invocation: /talent-ops screen <role-slug> <candidate-slug>
    per-claim notes with quotes/URLs).
 5. Score per _shared.md layers with the APPROVED contract weights,
    starting from the hard_filter_precheck in profile.md (re-check it —
-   intake's precheck is a hint, not the verdict). Write score.md:
-   frontmatter per data contract; body: one rationale paragraph per
+   intake's precheck is a hint, not the verdict). If the re-check
+   disagrees with intake's value, update profile.md's
+   hard_filter_precheck to the new result and add a `precheck-revised`
+   entry (with both values) to risks[]. Write score.md: frontmatter per
+   data contract — derive `recommendation` by applying the ordered rules
+   in _shared.md §Recommendation exactly, do not free-style; and
+   missing_evidence[] contains ONLY must-have claims without evidence
+   (nice_to_have gaps are excluded). Body: one rationale paragraph per
    layer. Partial-credit rationales MUST name the skill family.
 6. Update tracker row -> stage: screened, fill weighted_total and
-   confidence columns.
+   confidence columns, set updated_at to today's ISO date.
 7. Report to user: total, confidence, missing_evidence, top risk — and
    that this is an assistive recommendation; the decision is theirs.
 
