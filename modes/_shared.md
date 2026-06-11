@@ -115,7 +115,10 @@ total alone.
 first rule that matches:
 1. hard filter fail OR disqualifier hit → `reject-suggest` (keep the full
    score for the audit record)
-2. missing_evidence non-empty → at best `shortlist`; never `advance`
+2. missing_evidence non-empty → cap, not stop: continue to rules 3-6
+   for the actual value, but if rule 3 would produce `advance`, assign
+   `shortlist` instead. A candidate with missing evidence is never
+   `advance`.
 3. weighted_total >= 4.0 → `advance`
 4. weighted_total >= 3.3 → `shortlist`
 5. weighted_total >= 2.5 → `hold`
