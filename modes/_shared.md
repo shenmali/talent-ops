@@ -42,7 +42,8 @@ conflicts with this file, this file wins.
   approved_by, hard_filters{}, scoring_weights{} (sum 1.0),
   must_have[{skill, evidence_required}], nice_to_have[], disqualifiers[].
 - `profile.md`: name, email, location, source, applied_at, links[],
-  years_experience, last_roles[], languages[], parsed_by.
+  years_experience, last_roles[], languages[], parsed_by,
+  hard_filter_precheck (`pass` | `fail(<filter>)`, written by intake).
 - `evidence.md`: claims[{claim, source(cv|linkedin|github|portfolio|interview),
   evidence, evidence_type(repo|publication|certification|story|none),
   confidence(high|medium|low|none),
@@ -51,7 +52,11 @@ conflicts with this file, this file wins.
   evidence_match, behavior_signals}, weighted_total, confidence,
   missing_evidence[], risks[], recommendation, scored_by, scored_at.
 - `decision.md`: see templates/decision.md. decided_by MUST be human:*.
-- Tracker row: `| candidate-slug | role-slug | stage | weighted_total | confidence | updated_at | note |`
+- Tracker table header (literal):
+  `| candidate | role | stage | weighted_total | confidence | updated_at | note |`
+  followed by a `| --- |`-style separator row. Data rows hold the slugs;
+  unscored cells use `-`. Example:
+  `| jane-doe | backend-engineer | parsed | - | - | 2026-06-11 | |`
 
 ## Scoring rules
 

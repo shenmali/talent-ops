@@ -13,6 +13,10 @@ Invocation: /talent-ops intake <role-slug>
 1. List data/inbox/*. Supported: .pdf .docx .txt .md (one candidate per
    file); .csv (one candidate per row; required headers: name, email,
    location, cv_text; optional: links).
+   Do not filter inbox files by apparent role fit — the user pre-stages
+   data/inbox/ before each run. If a file clearly names a different
+   role, still process it and note the mismatch in the run summary (the
+   human decides at triage).
 2. For each item:
    a. Read content. Unreadable/empty -> append to data/quarantine.md
       (`| file | reason | date |`) and CONTINUE. Never delete originals.
@@ -26,11 +30,22 @@ Invocation: /talent-ops intake <role-slug>
    e. Create roles/<role>/candidates/<slug>/, MOVE the original into
       source/, write profile.md (frontmatter per _shared data contract,
       parsed_by: ai:<model>; body: structured CV summary).
+      CSV exception: never move the shared CSV per candidate. Write the
+      candidate's OWN row (plus header) to source/row.csv and set
+      source: csv:<original-filename> in profile.md — other applicants'
+      rows must not enter this candidate's dir (forget.mjs deletes per
+      candidate). After ALL rows are processed, move the original CSV to
+      data/inbox/processed/.
    f. Hard-filter precheck vs contract.hard_filters -> write
       hard_filter_precheck: pass | fail(<filter>) into profile
       frontmatter. A fail does NOT stop processing or trigger any
       decision.
-   g. Append tracker row, stage: parsed.
+   g. Append tracker row, stage: parsed. If data/tracker.md does not
+      exist, create it first with the literal header
+      `| candidate | role | stage | weighted_total | confidence | updated_at | note |`
+      and a `| --- | --- | --- | --- | --- | --- | --- |` separator row.
+      Row format: `| <slug> | <role-slug> | parsed | - | - | <ISO date> | |`
+      (`-` = not yet scored).
 3. Summary: created N, quarantined M (with reasons), duplicates K.
 
 ## Failure modes
