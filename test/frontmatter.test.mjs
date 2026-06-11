@@ -19,6 +19,19 @@ describe('parseFrontmatter', () => {
     expect(data).toEqual({})
     expect(body).toBe('body\n')
   })
+
+  it('parses a field whose value is the literal string ---', () => {
+    const { data, body } = parseFrontmatter('---\nnotes: ---\nrole: eng\n---\nbody\n')
+    expect(data.notes).toBe('---')
+    expect(data.role).toBe('eng')
+    expect(body).toBe('body\n')
+  })
+
+  it('accepts a file ending at the closing fence without trailing newline', () => {
+    const { data, body } = parseFrontmatter('---\na: 1\n---')
+    expect(data).toEqual({ a: 1 })
+    expect(body).toBe('')
+  })
 })
 
 describe('serializeFrontmatter', () => {
