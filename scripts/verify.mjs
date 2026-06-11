@@ -28,10 +28,16 @@ export function collectViolations(root = process.cwd()) {
   const v = []
   const rolesDir = join(root, 'roles')
   const files = walk(rolesDir)
-  const TERMINAL = ['hired', 'rejected', 'withdrawn']
+  const TERMINAL = states.terminal
 
   for (const f of files.filter((x) => x.endsWith('role-contract.md'))) {
-    const fm = readFm(f)
+    let fm
+    try {
+      fm = readFm(f)
+    } catch {
+      v.push(`${f}: unparseable frontmatter`)
+      continue
+    }
     if (fm.scoring_weights) {
       const sum = Object.values(fm.scoring_weights).reduce((a, b) => a + b, 0)
       if (Math.abs(sum - 1) > 0.001) v.push(`${f}: scoring_weights sum to ${sum}, expected 1.0`)
@@ -39,7 +45,13 @@ export function collectViolations(root = process.cwd()) {
   }
 
   for (const f of files.filter((x) => x.endsWith('/decision.md'))) {
-    const fm = readFm(f)
+    let fm
+    try {
+      fm = readFm(f)
+    } catch {
+      v.push(`${f}: unparseable frontmatter`)
+      continue
+    }
     if (!String(fm.decided_by ?? '').startsWith('human:'))
       v.push(`${f}: decided_by must start with "human:" (got "${fm.decided_by}")`)
     if (!(fm.decision in states.decisions))
@@ -53,7 +65,12 @@ export function collectViolations(root = process.cwd()) {
     if (!existsSync(join(dir, 'evidence.md'))) v.push(`${f}: score without evidence.md`)
     const contractPath = join(dir, '..', '..', 'role-contract.md')
     if (existsSync(contractPath)) {
-      const cfm = readFm(contractPath)
+      let cfm
+      try {
+        cfm = readFm(contractPath)
+      } catch {
+        continue // already flagged as unparseable by the contracts loop
+      }
       if (cfm.status !== 'approved')
         v.push(`${f}: scored while contract status is "${cfm.status}" (needs approved)`)
     } else {

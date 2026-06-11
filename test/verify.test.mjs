@@ -82,4 +82,32 @@ describe('collectViolations', () => {
     expect(out).toMatch(/unknown stage "flying"/)
     expect(out).toMatch(/missing candidate dir demo-role\/ghost/)
   })
+
+  it('flags unparseable decision frontmatter instead of crashing', () => {
+    const files = candidateFiles('demo-role', 'jane-doe')
+    files['roles/demo-role/candidates/jane-doe/decision.md'] = 'no frontmatter here\n'
+    const root = makeRepo({
+      'roles/demo-role/role-contract.md': approvedContract,
+      ...files,
+      'data/tracker.md': trackerWith([
+        ['jane-doe', 'demo-role', 'rejected', '3.9', 'medium', '2026-06-11', ''],
+      ]),
+    })
+    expect(collectViolations(root).join()).toMatch(/unparseable frontmatter/)
+  })
+
+  it('flags hired without reason_code and untracked candidates', () => {
+    const a = candidateFiles('demo-role', 'jane-doe', { decision: 'hired', reasonCode: '' })
+    const root = makeRepo({
+      'roles/demo-role/role-contract.md': approvedContract,
+      ...a,
+      'roles/demo-role/candidates/ghost-person/profile.md': '---\nname: Ghost\nemail: g@x.dev\n---\n',
+      'data/tracker.md': trackerWith([
+        ['jane-doe', 'demo-role', 'hired', '4.5', 'high', '2026-06-11', ''],
+      ]),
+    })
+    const out = collectViolations(root).join('\n')
+    expect(out).toMatch(/terminal decision requires a reason_code/)
+    expect(out).toMatch(/missing row for demo-role\/ghost-person/)
+  })
 })

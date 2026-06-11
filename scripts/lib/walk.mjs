@@ -10,6 +10,7 @@ export function walk(dir, out = []) {
     return out
   }
   for (const e of entries) {
+    if (e.name.startsWith('.')) continue
     const p = join(dir, e.name)
     if (e.isDirectory()) walk(p, out)
     else out.push(p)
