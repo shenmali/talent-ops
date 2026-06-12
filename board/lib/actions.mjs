@@ -57,3 +57,41 @@ export function applyDecision(root, { role, slug, decision, reasonCode, reasonDe
   writeTracker(root, { now })
   return { ok: true, override: data.override }
 }
+
+// --- changeStage + addNote (Task 7) ---
+// (serializeFrontmatter is already imported at the top of actions.mjs in Task 6.)
+
+function readFmBody(path) {
+  if (!existsSync(path)) return null
+  return parseFrontmatter(readFileSync(path, 'utf8'))
+}
+
+export function changeStage(root, { role, slug, toStage, userId, sinceToken, now = new Date() }) {
+  if (String(userId).startsWith('ai:')) return { ok: false, error: 'ai-identity' }
+  const states = loadStates(root)
+  if (!states.stages.includes(toStage)) return { ok: false, error: 'stage-invalid' }
+  if (TERMINAL.includes(toStage)) return { ok: false, error: 'terminal-stage' }
+  const path = join(candDir(root, role, slug), 'profile.md')
+  const parsed = readFmBody(path)
+  if (!parsed) return { ok: false, error: 'no-profile' }
+  const data = { ...parsed.data, stage: toStage }
+  const res = writeIfUnchanged(path, serializeFrontmatter(data, parsed.body), sinceToken)
+  if (!res.ok) return res
+  writeTracker(root, { now })
+  return { ok: true }
+}
+
+export function addNote(root, { role, slug, text, userId, sinceToken, now = new Date() }) {
+  if (String(userId).startsWith('ai:')) return { ok: false, error: 'ai-identity' }
+  if (!text || !text.trim()) return { ok: false, error: 'empty-note' }
+  const path = join(candDir(root, role, slug), 'profile.md')
+  const parsed = readFmBody(path)
+  if (!parsed) return { ok: false, error: 'no-profile' }
+  let body = parsed.body
+  if (!body.includes('## Notes')) body = body.replace(/\s*$/, '\n\n## Notes\n')
+  const stamp = now.toISOString().slice(0, 10)
+  body += `- ${stamp} human:${userId}: ${text.trim()}\n`
+  const res = writeIfUnchanged(path, serializeFrontmatter(parsed.data, body), sinceToken)
+  if (!res.ok) return res
+  return { ok: true }
+}

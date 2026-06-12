@@ -44,7 +44,9 @@ conflicts with this file, this file wins.
   must_have[{skill, evidence_required}], nice_to_have[], disqualifiers[].
 - `profile.md`: name, email, location, source, applied_at, links[],
   years_experience, last_roles[], languages[], parsed_by,
-  hard_filter_precheck (`pass` | `fail(<filter>)`, written by intake).
+  hard_filter_precheck (`pass` | `fail(<filter>)`, written by intake),
+  stage (optional non-terminal override, written ONLY by the board's
+  change-stage action; a recorded decision always wins over it).
 - `evidence.md`: claims[{claim, source(cv|linkedin|github|portfolio|interview),
   evidence, evidence_type(repo|publication|certification|story|none),
   confidence(high|medium|low|none),
