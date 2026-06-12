@@ -95,3 +95,19 @@ export function addNote(root, { role, slug, text, userId, sinceToken, now = new 
   if (!res.ok) return res
   return { ok: true }
 }
+
+// --- markEvidence (Task 8) ---
+const HUMAN_EVIDENCE_STATUS = ['human-confirmed', 'contradicted']
+
+export function markEvidence(root, { role, slug, claimIndex, status, userId, sinceToken }) {
+  if (String(userId).startsWith('ai:')) return { ok: false, error: 'ai-identity' }
+  if (!HUMAN_EVIDENCE_STATUS.includes(status)) return { ok: false, error: 'status-invalid' }
+  const path = join(candDir(root, role, slug), 'evidence.md')
+  const parsed = readFmBody(path)
+  if (!parsed || !Array.isArray(parsed.data.claims)) return { ok: false, error: 'no-evidence' }
+  const i = Number(claimIndex)
+  if (!Number.isInteger(i) || i < 0 || i >= parsed.data.claims.length) return { ok: false, error: 'claim-index' }
+  const claims = parsed.data.claims.map((c, idx) => (idx === i ? { ...c, status } : c))
+  const data = { ...parsed.data, claims }
+  return writeIfUnchanged(path, serializeFrontmatter(data, parsed.body), sinceToken)
+}
