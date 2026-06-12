@@ -77,7 +77,7 @@ describe('renderTriage', () => {
     const html = renderTriage(model.roles[0], q, states, { userId: 'ali' })
     expect(html).toContain('Good')
     expect(html).toContain('calibrate')             // calibration banner/flag
-    expect(html).toContain('requires explicit human look')
+    expect(html).toMatch(/requires explicit human look/i)
     expect(html).toContain('Blocked')               // hard-fail isolated, still shown
     expect(html).toContain('anti-miss')             // anti-miss note
     expect(html).toContain('id="bulk-reject"')      // bulk reject form

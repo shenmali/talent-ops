@@ -27,8 +27,8 @@ function slaClass(sla) {
 }
 
 function card(roleSlug, c) {
-  const score = c.weightedTotal == null ? '—' : `${c.weightedTotal} (${esc(c.confidence)})`
-  const missing = c.missingCount == null ? '' : `<span class="missing">missing: ${c.missingCount}</span>`
+  const score = c.weightedTotal == null ? '—' : `${esc(c.weightedTotal)} (${esc(c.confidence)})`
+  const missing = c.missingCount == null ? '' : `<span class="missing">missing: ${esc(c.missingCount)}</span>`
   const days = c.daysInStage == null ? '' : `<span class="days ${slaClass(c.sla)}">${c.daysInStage}d</span>`
   const rec = c.recommendation ? `<span class="rec rec-${esc(c.recommendation)}">${esc(c.recommendation)}</span>` : ''
   return `<a class="card" href="/candidate/${esc(roleSlug)}/${esc(c.slug)}">
@@ -166,7 +166,7 @@ ${banner}
 <tbody>${rows || '<tr><td colspan="6">No screened candidates.</td></tr>'}</tbody></table>
 <p class="anti-miss"><strong>anti-miss:</strong> before rejecting in bulk, re-check a sample spread across the score range — the confirm box below is required.</p>
 ${bulkForm}
-<section class="needs-human"><h2>requires explicit human look (never auto-decided)</h2>
+<section class="needs-human"><h2>Requires explicit human look (never auto-decided)</h2>
 <ul>${blocked || '<li>none</li>'}</ul></section>
 <p>Advancing and per-candidate decisions are recorded from each candidate's page, stamped human:${esc(userId)}.</p>`
 }
