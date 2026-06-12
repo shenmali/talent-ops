@@ -1,6 +1,6 @@
 // board/server.mjs — Talent-Ops local board (zero-build, zero runtime dep).
 import { createServer } from 'node:http'
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync, watch } from 'node:fs'
 import { join, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parse as parseYaml } from 'yaml'
@@ -35,11 +35,29 @@ function readBody(req) {
 }
 
 export function createBoardServer({ root = process.cwd(), userId = 'unknown' } = {}) {
+  const clients = new Set()
+  function broadcast(msg) {
+    for (const res of clients) res.write(`data: ${msg}\n\n`)
+  }
+
   const server = createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost')
     const parts = url.pathname.split('/').filter(Boolean)
 
     if (url.pathname === '/healthz') return send(res, 200, 'ok', 'text/plain')
+
+    if (url.pathname === '/events') {
+      res.writeHead(200, {
+        'content-type': 'text/event-stream',
+        'cache-control': 'no-cache',
+        connection: 'keep-alive',
+      })
+      res.write('data: connected\n\n')
+      clients.add(res)
+      req.on('close', () => clients.delete(res))
+      return
+    }
+
     if (parts[0] === 'public') return serveStatic(res, parts[1])
 
     if (req.method === 'POST' && parts[0] === 'action' && parts[1]) {
@@ -118,6 +136,23 @@ export function createBoardServer({ root = process.cwd(), userId = 'unknown' } =
     }
     return send(res, 405, 'method not allowed', 'text/plain')
   })
+  const watchers = []
+  for (const dir of ['roles', 'data']) {
+    const p = join(root, dir)
+    if (existsSync(p)) {
+      try {
+        watchers.push(watch(p, { recursive: true }, () => broadcast('reload')))
+      } catch {
+        // recursive watch unsupported on some platforms — board still works, just no live refresh
+      }
+    }
+  }
+  server.on('close', () => {
+    for (const w of watchers) w.close()
+    for (const res of clients) res.end()
+    clients.clear()
+  })
+
   return server
 }
 
