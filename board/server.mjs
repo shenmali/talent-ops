@@ -5,6 +5,7 @@ import { join, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parse as parseYaml } from 'yaml'
 import { buildModel, loadCandidate, triageQueue } from './lib/model.mjs'
+import { applyDecision, changeStage, markEvidence, addNote } from './lib/actions.mjs'
 import { renderPage, renderPipeline, renderCandidate, renderTriage, renderRole } from './lib/render.mjs'
 import { loadStates } from '../scripts/lib/states.mjs'
 import { fileToken } from '../scripts/lib/atomic.mjs'
@@ -25,13 +26,45 @@ function serveStatic(res, name) {
   send(res, 200, readFileSync(file), MIME[extname(name)] || 'application/octet-stream')
 }
 
+function readBody(req) {
+  return new Promise((resolve) => {
+    let data = ''
+    req.on('data', (c) => (data += c))
+    req.on('end', () => resolve(new URLSearchParams(data)))
+  })
+}
+
 export function createBoardServer({ root = process.cwd(), userId = 'unknown' } = {}) {
-  const server = createServer((req, res) => {
+  const server = createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost')
     const parts = url.pathname.split('/').filter(Boolean)
 
     if (url.pathname === '/healthz') return send(res, 200, 'ok', 'text/plain')
     if (parts[0] === 'public') return serveStatic(res, parts[1])
+
+    if (req.method === 'POST' && parts[0] === 'action' && parts[1]) {
+      const form = await readBody(req)
+      const role = form.get('role')
+      const slug = form.get('slug')
+      const sinceToken = form.get('sinceToken')
+      const dest = `/candidate/${role}/${slug}`
+      let result
+      // userId ALWAYS from the server config — never from the form
+      if (parts[1] === 'decision') {
+        result = applyDecision(root, { role, slug, decision: form.get('decision'), reasonCode: form.get('reason_code'), reasonDetail: form.get('reason_detail') || '', userId, sinceToken })
+      } else if (parts[1] === 'stage') {
+        result = changeStage(root, { role, slug, toStage: form.get('toStage'), userId, sinceToken })
+      } else if (parts[1] === 'evidence') {
+        result = markEvidence(root, { role, slug, claimIndex: form.get('claimIndex'), status: form.get('status'), userId, sinceToken })
+      } else if (parts[1] === 'note') {
+        result = addNote(root, { role, slug, text: form.get('text'), userId, sinceToken })
+      } else {
+        return send(res, 404, 'unknown action', 'text/plain')
+      }
+      const location = result.ok ? dest : `${dest}?error=${encodeURIComponent(result.error)}`
+      res.writeHead(303, { location })
+      return res.end()
+    }
 
     if (req.method === 'GET') {
       try {
