@@ -100,7 +100,7 @@ talent-ops/   (= HR-ops repo kökü)
 │   ├── quarantine.md         # parse edilemeyenler
 │   ├── tracker.md            # kanonik pipeline tablosu
 │   └── talent-memory.md
-├── board/                    # Node server + Vite/React SPA
+├── board/                    # tek Node process: SSR HTML + form POST + SSE (zero-build)
 ├── scripts/
 │   ├── verify.mjs            # tutarlılık denetimi
 │   ├── dedupe.mjs
@@ -240,7 +240,7 @@ Tek kanonik tablo: `| candidate-slug | role-slug | stage | weighted_total | conf
 
 ## 7. Web Board
 
-- **Çalıştırma:** `npm run board` → tek Node process, localhost. Dosya watcher + SSE ile canlı yenileme. Stack: Node server + Vite/React hafif SPA. DB yok, auth yok (tek kullanıcı, MVP).
+- **Çalıştırma:** `npm run board` → tek Node process, localhost. Dosya watcher + SSE ile canlı yenileme. Stack: tek Node process, server-side-rendered HTML + HTML-form POST write'lar + SSE; sıfır-build, sıfır runtime bağımlılığı. DB yok, auth yok (tek kullanıcı, MVP). *(Revizyon 2026-06-11: önceki taslakta "Vite/React hafif SPA" yazıyordu; zero-build/zero-dep hedefiyle SSR'a alındı.)*
 - **Ekranlar:** (1) Pipeline kanban — kartta: isim, skor+güven, tek satır uygunluk gerekçesi, eksik kanıt sayısı, kaynak, aşama günü/SLA rengi; (2) Aday detayı — profil + Evidence Ledger tablosu + 5 katman skor kırılımı + karar geçmişi; (3) Triage kuyruğu — kalibrasyon etiketleri, çoklu seçim, sebep kodlu toplu karar, anti-miss örneklem kutusu; (4) Rol görünümü — kontrat özeti, drift log, JD.
 - **Yazma aksiyonları (beyaz liste):** aşama değiştir (yalnız uç olmayan aşamalar arası); karar + sebep kodu (dropdown, `states.yml`); kanıt durumu işaretle (`human-confirmed`/`contradicted`); not ekle. Başka yazma yok. Uç aşamalara (`hired`/`rejected`/`withdrawn`) geçiş yalnız karar aksiyonuyla olur — sebep kodsuz red için arka kapı yoktur.
 - **Güvenceler:** şema doğrulama → atomik yazma → `decided_by: human:<config kullanıcısı>` damgası. Board üzerinden `ai:*` karar yazılamaz. Yazmadan önce dosya yeniden okunur; render'dan beri değiştiyse uyarı.
