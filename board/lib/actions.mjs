@@ -113,8 +113,6 @@ export function markEvidence(root, { role, slug, claimIndex, status, userId, sin
 }
 
 // --- bulkReject (Task 14) — triage bulk decision, reject only ---
-import { fileToken } from '../../scripts/lib/atomic.mjs'
-
 export function bulkReject(root, { role, slugs, reasonCode, userId, now = new Date() }) {
   if (String(userId).startsWith('ai:')) return { ok: false, error: 'ai-identity' }
   const states = loadStates(root)

@@ -586,6 +586,7 @@ Expected: FAIL — `loadCandidate` is not exported
 
 ```js
 // --- detail + queue + tracker (Task 4) ---
+import { mkdirSync } from 'node:fs'
 import { writeAtomic } from '../../scripts/lib/atomic.mjs'
 
 function readFmBody(path) {
@@ -658,6 +659,7 @@ export function writeTracker(root, { now = new Date() } = {}) {
       rows.push(`| ${c.slug} | ${role.slug} | ${c.stage} | ${c.weightedTotal ?? '-'} | ${c.confidence ?? '-'} | ${c.updatedAt ?? '-'} | ${note} |`)
     }
   }
+  mkdirSync(join(root, 'data'), { recursive: true })
   writeAtomic(join(root, 'data', 'tracker.md'), header + rows.join('\n') + '\n')
 }
 ```
@@ -2193,8 +2195,6 @@ Expected: FAIL — `bulkReject` is not exported
 
 ```js
 // --- bulkReject (Task 14) — triage bulk decision, reject only ---
-import { fileToken } from '../../scripts/lib/atomic.mjs'
-
 export function bulkReject(root, { role, slugs, reasonCode, userId, now = new Date() }) {
   if (String(userId).startsWith('ai:')) return { ok: false, error: 'ai-identity' }
   const states = loadStates(root)
@@ -2204,8 +2204,8 @@ export function bulkReject(root, { role, slugs, reasonCode, userId, now = new Da
   const rejected = []
   const skipped = []
   for (const slug of list) {
-    const token = fileToken(join(candDir(root, role, slug), 'decision.md'))
-    const r = applyDecision(root, { role, slug, decision: 'rejected', reasonCode, reasonDetail: 'bulk triage reject', userId, sinceToken: token, now })
+    // sinceToken 'absent' = "only write if no decision yet" → already-decided candidates skip as conflict
+    const r = applyDecision(root, { role, slug, decision: 'rejected', reasonCode, reasonDetail: 'bulk triage reject', userId, sinceToken: 'absent', now })
     if (r.ok) rejected.push(slug)
     else skipped.push({ slug, error: r.error })
   }
