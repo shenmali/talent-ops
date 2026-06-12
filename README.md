@@ -63,4 +63,16 @@ NYC LL144, ...).
 - `npm test` — deterministic script tests (vitest)
 - `examples/golden-checks.md` — 10 LLM-behavior assertions to run in your CLI
 
-Web board (local triage UI) ships separately — see the roadmap.
+## Web board (local triage UI)
+
+`npm run board` starts a local, zero-build board at http://localhost:4319
+(set `PORT` to change). It reads the same files the CLI writes and renders
+four views: a pipeline kanban, a candidate detail (evidence ledger + score
+breakdown), a triage queue, and a role view. Write actions — record a
+reason-coded decision, change a non-terminal stage, confirm/contradict an
+evidence claim, add a note — go straight back to the candidate files,
+atomically, stamped `human:<your config user.id>`. The board never writes
+an AI identity and never decides; it records what you decide. Run
+`npm run verify` any time to confirm integrity.
+
+Manual behavior checks live in `board/board-checks.md`.
