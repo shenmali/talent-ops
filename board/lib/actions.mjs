@@ -111,3 +111,22 @@ export function markEvidence(root, { role, slug, claimIndex, status, userId, sin
   const data = { ...parsed.data, claims }
   return writeIfUnchanged(path, serializeFrontmatter(data, parsed.body), sinceToken)
 }
+
+// --- bulkReject (Task 14) — triage bulk decision, reject only ---
+import { fileToken } from '../../scripts/lib/atomic.mjs'
+
+export function bulkReject(root, { role, slugs, reasonCode, userId, now = new Date() }) {
+  if (String(userId).startsWith('ai:')) return { ok: false, error: 'ai-identity' }
+  const states = loadStates(root)
+  if (!states.reason_codes.includes(reasonCode)) return { ok: false, error: 'reason-invalid' }
+  const list = (Array.isArray(slugs) ? slugs : [slugs]).filter(Boolean)
+  if (!list.length) return { ok: false, error: 'no-selection' }
+  const rejected = []
+  const skipped = []
+  for (const slug of list) {
+    const r = applyDecision(root, { role, slug, decision: 'rejected', reasonCode, reasonDetail: 'bulk triage reject', userId, sinceToken: 'absent', now })
+    if (r.ok) rejected.push(slug)
+    else skipped.push({ slug, error: r.error })
+  }
+  return { ok: true, rejected, skipped }
+}

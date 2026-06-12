@@ -30,3 +30,7 @@ npm run board   # http://localhost:4319
   a file (or `npm run forget`); the open page reloads within ~1s.
 - [ ] BC10 — Disclosure/identity: the top bar shows `human:<id>`; no view
   offers any way to record an AI decision.
+- [ ] BC11 — Triage bulk reject: select two screened candidates, pick a
+  reason code, tick the anti-miss box, submit → both gain a human-stamped
+  rejected decision.md; submitting without the anti-miss box is refused
+  with `?error=anti-miss-unconfirmed`.

@@ -68,7 +68,7 @@ NYC LL144, ...).
 `npm run board` starts a local, zero-build board at http://localhost:4319
 (set `PORT` to change). It reads the same files the CLI writes and renders
 four views: a pipeline kanban, a candidate detail (evidence ledger + score
-breakdown), a triage queue, and a role view. Write actions — record a
+breakdown), a triage queue (with anti-miss-gated bulk reject), and a role view. Write actions — record a
 reason-coded decision, change a non-terminal stage, confirm/contradict an
 evidence claim, add a note — go straight back to the candidate files,
 atomically, stamped `human:<your config user.id>`. The board never writes

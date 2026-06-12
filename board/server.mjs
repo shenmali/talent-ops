@@ -5,7 +5,7 @@ import { join, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parse as parseYaml } from 'yaml'
 import { buildModel, loadCandidate, triageQueue } from './lib/model.mjs'
-import { applyDecision, changeStage, markEvidence, addNote } from './lib/actions.mjs'
+import { applyDecision, changeStage, markEvidence, addNote, bulkReject } from './lib/actions.mjs'
 import { renderPage, renderPipeline, renderCandidate, renderTriage, renderRole } from './lib/render.mjs'
 import { loadStates } from '../scripts/lib/states.mjs'
 import { fileToken } from '../scripts/lib/atomic.mjs'
@@ -82,6 +82,15 @@ export function createBoardServer({ root = process.cwd(), userId = 'unknown' } =
           result = markEvidence(root, { role, slug, claimIndex: form.get('claimIndex'), status: form.get('status'), userId, sinceToken })
         } else if (parts[1] === 'note') {
           result = addNote(root, { role, slug, text: form.get('text'), userId, sinceToken })
+        } else if (parts[1] === 'triage-reject') {
+          const tdest = `/triage/${role}`
+          if (form.get('antiMissConfirmed') !== 'yes') {
+            res.writeHead(303, { location: `${tdest}?error=anti-miss-unconfirmed` })
+            return res.end()
+          }
+          const r = bulkReject(root, { role, slugs: form.getAll('slug'), reasonCode: form.get('reason_code'), userId })
+          res.writeHead(303, { location: r.ok ? `${tdest}?rejected=${r.rejected.length}` : `${tdest}?error=${encodeURIComponent(r.error)}` })
+          return res.end()
         } else {
           return send(res, 404, 'unknown action', 'text/plain')
         }
