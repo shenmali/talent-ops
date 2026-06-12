@@ -43,27 +43,37 @@ export function createBoardServer({ root = process.cwd(), userId = 'unknown' } =
     if (parts[0] === 'public') return serveStatic(res, parts[1])
 
     if (req.method === 'POST' && parts[0] === 'action' && parts[1]) {
-      const form = await readBody(req)
-      const role = form.get('role')
-      const slug = form.get('slug')
-      const sinceToken = form.get('sinceToken')
-      const dest = `/candidate/${role}/${slug}`
-      let result
-      // userId ALWAYS from the server config — never from the form
-      if (parts[1] === 'decision') {
-        result = applyDecision(root, { role, slug, decision: form.get('decision'), reasonCode: form.get('reason_code'), reasonDetail: form.get('reason_detail') || '', userId, sinceToken })
-      } else if (parts[1] === 'stage') {
-        result = changeStage(root, { role, slug, toStage: form.get('toStage'), userId, sinceToken })
-      } else if (parts[1] === 'evidence') {
-        result = markEvidence(root, { role, slug, claimIndex: form.get('claimIndex'), status: form.get('status'), userId, sinceToken })
-      } else if (parts[1] === 'note') {
-        result = addNote(root, { role, slug, text: form.get('text'), userId, sinceToken })
-      } else {
-        return send(res, 404, 'unknown action', 'text/plain')
+      try {
+        const form = await readBody(req)
+        const role = form.get('role')
+        const slug = form.get('slug')
+        const sinceToken = form.get('sinceToken')
+        // slug-based actions need both; triage-reject (added later) handles its own missing-slug case
+        if (parts[1] !== 'triage-reject' && (!role || !slug)) {
+          res.writeHead(303, { location: '/?error=bad-request' })
+          return res.end()
+        }
+        const dest = `/candidate/${role}/${slug}`
+        let result
+        // userId ALWAYS from the server config — never from the form
+        if (parts[1] === 'decision') {
+          result = applyDecision(root, { role, slug, decision: form.get('decision'), reasonCode: form.get('reason_code'), reasonDetail: form.get('reason_detail') || '', userId, sinceToken })
+        } else if (parts[1] === 'stage') {
+          result = changeStage(root, { role, slug, toStage: form.get('toStage'), userId, sinceToken })
+        } else if (parts[1] === 'evidence') {
+          result = markEvidence(root, { role, slug, claimIndex: form.get('claimIndex'), status: form.get('status'), userId, sinceToken })
+        } else if (parts[1] === 'note') {
+          result = addNote(root, { role, slug, text: form.get('text'), userId, sinceToken })
+        } else {
+          return send(res, 404, 'unknown action', 'text/plain')
+        }
+        const location = result.ok ? dest : `${dest}?error=${encodeURIComponent(result.error)}`
+        res.writeHead(303, { location })
+        return res.end()
+      } catch {
+        res.writeHead(303, { location: '/?error=server-error' })
+        return res.end()
       }
-      const location = result.ok ? dest : `${dest}?error=${encodeURIComponent(result.error)}`
-      res.writeHead(303, { location })
-      return res.end()
     }
 
     if (req.method === 'GET') {

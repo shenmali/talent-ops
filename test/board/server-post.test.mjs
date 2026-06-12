@@ -75,4 +75,12 @@ describe('board POST /action', () => {
     expect(res.status).toBe(303)
     expect(parseFrontmatter(readFileSync(join(root, 'roles/r/candidates/jane/profile.md'), 'utf8')).data.stage).toBe('triage')
   })
+
+  it('redirects gracefully (no hang) when role/slug are missing', async () => {
+    const root = repo()
+    const base = await boot(root)
+    const res = await postForm(base, '/action/decision', { decision: 'advanced', sinceToken: 'absent' })
+    expect(res.status).toBe(303)
+    expect(res.headers.get('location')).toContain('error=bad-request')
+  })
 })
