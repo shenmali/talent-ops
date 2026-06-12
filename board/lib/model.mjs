@@ -103,3 +103,81 @@ export function buildModel(root, { now = new Date() } = {}) {
 
   return { generatedAt: now.toISOString(), roles }
 }
+
+// --- detail + queue + tracker (Task 4) ---
+import { mkdirSync } from 'node:fs'
+import { writeAtomic } from '../../scripts/lib/atomic.mjs'
+
+function readFmBody(path) {
+  if (!existsSync(path)) return { data: null, body: '' }
+  try {
+    return parseFrontmatter(readFileSync(path, 'utf8'))
+  } catch {
+    return { data: null, body: '' }
+  }
+}
+
+export function loadCandidate(root, role, slug) {
+  const states = loadStates(root)
+  const cdir = join(root, 'roles', role, 'candidates', slug)
+  const profile = readFm(join(cdir, 'profile.md'))
+  const evidence = readFm(join(cdir, 'evidence.md'))
+  const score = readFm(join(cdir, 'score.md'))
+  const decision = readFm(join(cdir, 'decision.md'))
+  const stage = deriveStage(states, { decision, stageOverride: profile?.stage, hasScore: !!score, hasProfile: !!profile })
+  return {
+    role,
+    slug,
+    name: profile?.name ?? slug,
+    profile,
+    profileBody: readFmBody(join(cdir, 'profile.md')).body,
+    claims: Array.isArray(evidence?.claims) ? evidence.claims : [],
+    score: score ?? null,
+    decision: decision ?? null,
+    packetExists: existsSync(join(cdir, 'packet.md')),
+    stage,
+    updatedAt: decision?.decided_at || score?.scored_at || profile?.applied_at || null,
+  }
+}
+
+const BAND = { high: 0, medium: 1, low: 2 }
+
+export function triageQueue(roleModel, states) {
+  const screened = roleModel.candidates.filter((c) => c.stage === 'screened')
+  const needsHumanLook = []
+  const main = []
+  for (const c of screened) {
+    // reject-suggest from a hard fail / disqualifier must never be bulk-decided
+    if (c.recommendation === 'reject-suggest') needsHumanLook.push(c)
+    else main.push(c)
+  }
+  main.sort((a, b) => {
+    const band = (BAND[a.confidence] ?? 3) - (BAND[b.confidence] ?? 3)
+    if (band !== 0) return band
+    return (b.weightedTotal ?? 0) - (a.weightedTotal ?? 0)
+  })
+  const hasDecisions = roleModel.counts.interview + roleModel.counts.decision +
+    roleModel.counts.hired + roleModel.counts.rejected + roleModel.counts.withdrawn > 0
+  const calibrate = !hasDecisions
+  const limit = Math.min(15, main.length)
+  const entries = main.map((c, i) => ({ ...c, calibrate: calibrate && i < limit }))
+  return { calibrate, entries, needsHumanLook }
+}
+
+export function writeTracker(root, { now = new Date() } = {}) {
+  const model = buildModel(root, { now })
+  const header =
+    '| candidate | role | stage | weighted_total | confidence | updated_at | note |\n' +
+    '| --- | --- | --- | --- | --- | --- | --- |\n'
+  const rows = []
+  for (const role of model.roles) {
+    for (const c of role.candidates) {
+      const note = c.stage && ['hired', 'rejected', 'withdrawn'].includes(c.stage)
+        ? `reason: ${readFm(join(root, 'roles', role.slug, 'candidates', c.slug, 'decision.md'))?.reason_code ?? ''}`
+        : ''
+      rows.push(`| ${c.slug} | ${role.slug} | ${c.stage} | ${c.weightedTotal ?? '-'} | ${c.confidence ?? '-'} | ${c.updatedAt ?? '-'} | ${note} |`)
+    }
+  }
+  mkdirSync(join(root, 'data'), { recursive: true })
+  writeAtomic(join(root, 'data', 'tracker.md'), header + rows.join('\n') + '\n')
+}
