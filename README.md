@@ -1,5 +1,8 @@
 # Talent-Ops
 
+[![CI](https://github.com/shenmali/talent-ops/actions/workflows/ci.yml/badge.svg)](https://github.com/shenmali/talent-ops/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 **Evidence-based hiring operating system for AI coding CLIs.**
 The employer-side mirror of [career-ops](https://github.com/santifer/career-ops):
 candidates got AI to choose companies — this gives hiring teams AI to
