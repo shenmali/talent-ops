@@ -25,7 +25,7 @@ choose candidates *on evidence, not keywords*.
 ## Quickstart (10 minutes, no real data needed)
 
 ```bash
-git clone <this repo> && cd talent-ops && npm install
+git clone https://github.com/shenmali/talent-ops && cd talent-ops && npm install
 cp config/company-profile.example.yml config/company-profile.yml  # set user.id
 cp -r examples/role-ai-automation-specialist-hr roles/ai-automation-specialist-hr
 cp examples/inbox-samples/* data/inbox/
@@ -46,8 +46,10 @@ npm run verify   # integrity: human-only decisions, reason codes, tracker consis
 
 ## Privacy & compliance
 
-This template repo must stay free of real candidate data: run your hiring
-in a **private** copy. `npm run forget -- <role> <candidate>` removes a
+Real candidate data must never be committed. `roles/` and the working files
+under `data/` are gitignored, so your live hiring data stays local even if
+you `git add .` — only the fictional `examples/` fixtures are tracked. Run
+your hiring in your own copy. `npm run forget -- <role> <candidate>` removes a
 candidate (and warns that git history needs separate rewriting).
 `npm run export-audit -- <role>` produces a per-role audit package
 (weights, decisions, override rate, disclosure status). The generated JD
@@ -76,3 +78,8 @@ an AI identity and never decides; it records what you decide. Run
 `npm run verify` any time to confirm integrity.
 
 Manual behavior checks live in `board/board-checks.md`.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Built with [Claude Code](https://claude.com/claude-code).
+Inspired by and complementary to [career-ops](https://github.com/santifer/career-ops).

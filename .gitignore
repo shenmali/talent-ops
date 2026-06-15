@@ -1,3 +1,18 @@
 .DS_Store
 node_modules/
 config/company-profile.yml
+
+# Runtime hiring data — real candidate PII must NEVER be committed.
+# Demo fixtures live in examples/ (committed); working data does not.
+/roles/*
+!/roles/.gitkeep
+/data/inbox/*
+!/data/inbox/.gitkeep
+/data/processed/
+/data/tracker.md
+/data/talent-memory.md
+/data/quarantine.md
+/data/batch-state.md
+
+# Personal dev-server config (Claude Preview)
+/.claude/launch.json
