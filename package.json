@@ -12,7 +12,9 @@
     "verify": "node scripts/verify.mjs",
     "dedupe": "node scripts/dedupe.mjs",
     "export-audit": "node scripts/export-audit.mjs",
-    "forget": "node scripts/forget.mjs"
+    "forget": "node scripts/forget.mjs",
+    "followup": "node scripts/followup.mjs",
+    "analyze-funnel": "node scripts/analyze-funnel.mjs"
   },
   "dependencies": { "yaml": "^2.4.0" },
   "devDependencies": { "vitest": "^3.0.0" }

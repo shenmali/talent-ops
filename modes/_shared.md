@@ -58,6 +58,9 @@ conflicts with this file, this file wins.
 - `packet.md`: assembled by the decision mode — profile summary, evidence
   table, score digest, scorecard digests, risks, ai_recommendation
   (labeled assistive). No decisions live here.
+- `outreach.md`: chronological draft messages to the candidate (invite |
+  reject | offer | followup-update), each stamped `drafted_by: ai:<model>`
+  and `status: draft|approved`. Drafts only — never sent. Not a decision.
 - Tracker table header (literal):
   `| candidate | role | stage | weighted_total | confidence | updated_at | note |`
   followed by a `| --- |`-style separator row. Data rows hold the slugs;

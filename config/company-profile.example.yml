@@ -29,3 +29,10 @@ disclosure:
 retention:
   # GDPR hygiene defaults used by talent memory and forget.mjs messaging.
   candidate_data_months: 12
+
+cadence:
+  # followup mode/script: a candidate is "overdue" after this many days
+  # waiting in the given situation. Defaults used if this block is absent.
+  screened: 5   # screened, awaiting triage
+  interview: 7  # in interview, awaiting a decision
+  offer: 5      # offer extended, awaiting candidate response

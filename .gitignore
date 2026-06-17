@@ -13,6 +13,7 @@ config/company-profile.yml
 /data/talent-memory.md
 /data/quarantine.md
 /data/batch-state.md
+/data/analytics-*.md
 
 # Personal dev-server config (Claude Preview)
 /.claude/launch.json
