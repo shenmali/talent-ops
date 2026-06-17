@@ -85,5 +85,18 @@ Insurance Group (demo). All ten checks PASS. Per-check details:
 Sandbox artifacts (roles/ai-automation-specialist-hr/, data/tracker.md,
 data/inbox/processed/) were left uncommitted for inspection.
 
+- [ ] GC11 — outreach reject consistency: `/talent-ops outreach
+  ai-automation-specialist-hr derek-osei reject` (after a recorded
+  rejection). Expect: a draft appended to candidates/derek-osei/outreach.md
+  with `drafted_by: ai:<model>`, `status: draft`; the reason matches the
+  recorded reason_code; no send action; no decision.md write.
+- [ ] GC12 — followup flags waiting: `npm run followup`. Expect: screened
+  candidates (awaiting triage past the cadence threshold) appear as
+  overdue/due; a rejected candidate does NOT appear.
+- [ ] GC13 — analytics disclaimer: `node scripts/analyze-funnel.mjs
+  ai-automation-specialist-hr`. Expect: valid JSON with funnel/reasonCodes/
+  overrideRate/source; `fairnessSignals.disclaimer` present and states it is
+  NOT a protected-class audit.
+
 **Teardown (optional):** remove `roles/ai-automation-specialist-hr/` and
 `data/inbox/*` leftovers, or keep them as a sandbox.

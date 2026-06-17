@@ -2,7 +2,7 @@
 name: talent-ops
 description: Evidence-based hiring command center — define roles, generate JDs, screen applications, triage with reason-coded decisions
 user_invocable: true
-argument-hint: "[define-role | jd | intake | screen | batch | triage | interview-kit | decision | tracker | memory]"
+argument-hint: "[define-role | jd | intake | screen | batch | triage | interview-kit | decision | outreach | followup | analytics | tracker | memory]"
 ---
 
 # talent-ops — Router
@@ -22,6 +22,9 @@ Determine the mode from the first argument:
 | `triage <role-slug>` | triage |
 | `interview-kit <role-slug> <candidate-slug>` | interview-kit |
 | `decision <role-slug> <candidate-slug>` | decision |
+| `outreach <role-slug> <candidate-slug> [type]` | outreach |
+| `followup` | followup |
+| `analytics [role-slug]` | analytics |
 | `tracker` | tracker |
 | `memory [role-slug]` | memory |
 
@@ -45,6 +48,9 @@ talent-ops — Hiring Command Center
   /talent-ops triage <role>          -> Ranked queue + reason-coded human decisions
   /talent-ops interview-kit <role> <cand> -> Structured interview plan from evidence gaps
   /talent-ops decision <role> <cand> -> Decision packet + recorded human decision
+  /talent-ops outreach <role> <cand>  -> Draft candidate message (invite/reject/offer); never sent
+  /talent-ops followup                -> Candidates waiting past cadence + update draft
+  /talent-ops analytics [role]        -> Hiring funnel + insights
   /talent-ops tracker                -> Pipeline overview + SLA warnings
   /talent-ops memory [role]          -> Talent memory: rediscover strong past candidates
 
@@ -62,6 +68,7 @@ Integrity: npm run verify
   intake load _shared.md for slug/quarantine/provenance rules and run
   without an approved contract.)
 - Standalone (own file only): tracker, memory.
+- Standalone (own file only; followup/analytics additionally invoke their respective script): outreach, followup, analytics.
 - `batch` delegates per-candidate work to subagents, injecting the content
   of `_shared.md` + `screen.md` into each subagent prompt.
 

@@ -79,6 +79,9 @@ flowchart TD
 | `/talent-ops triage <role>` | Ranked queue -> reason-coded human decisions |
 | `/talent-ops interview-kit <role> <cand>` | Interview plan targeting evidence gaps |
 | `/talent-ops decision <role> <cand>` | Decision packet -> recorded human decision |
+| `/talent-ops outreach <role> <cand>` | Draft a candidate message (invite/reject/offer) — never sent |
+| `/talent-ops followup` | Surface candidates waiting past cadence + draft an update |
+| `/talent-ops analytics [role]` | Hiring funnel + insights (override rate, sources, fairness signals) |
 | `/talent-ops tracker` / `memory` | Pipeline overview / rediscover past candidates |
 
 ## Quickstart (10 minutes, no real data needed)
