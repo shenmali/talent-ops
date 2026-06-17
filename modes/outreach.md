@@ -14,7 +14,7 @@ Invocation: /talent-ops outreach <role-slug> <candidate-slug> [invite|reject|off
   recorded offer/hired decision. Refuse otherwise: "record the decision
   first" (outreach reflects a decision, it does not make one).
 
-## Output file: candidate/outreach.md
+## Output file: candidates/<slug>/outreach.md
 Chronological append. Each entry:
 
 ```
