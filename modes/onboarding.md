@@ -29,8 +29,9 @@ Invocation: /talent-ops onboarding <role-slug> <candidate-slug>
 3. Framing: respectful, forward-looking. A development aid for the manager
    and new hire — NOT a performance verdict, NOT a re-litigation of the
    hire. No protected attributes; no comparison to other candidates.
-4. Write candidates/<slug>/onboarding.md (atomic) with status: draft. Like
-   outreach, the manager edits/approves: status draft -> approved.
+4. Write candidates/<slug>/onboarding.md (atomic: write <file>.tmp, then
+   rename) with status: draft. Like outreach, the manager edits/approves:
+   status draft -> approved.
 5. Tell the user to review it with the new hire's manager and run
    `npm run verify` (unaffected — keeps the habit).
 
@@ -48,7 +49,7 @@ candidate: <candidate-slug>
 role: <role-slug>
 generated_by: ai:<model>
 generated_at: <YYYY-MM-DD>
-status: draft
+status: draft   # draft -> approved (manager)
 ---
 # Onboarding Plan — <candidate name>, <title>
 
