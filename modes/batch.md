@@ -24,7 +24,7 @@ Invocation: /talent-ops batch <role-slug>
    MUST NOT touch.
 4. As results land: the CONTROLLER (this orchestrating session, never a
    subagent) serializes updates to batch-state.md and the tracker (stage:
-   screened, weighted_total, confidence, updated_at — per screen step 6),
+   screened, weighted_total, confidence, updated_at — per screen step 7),
    one write at a time. Concurrent read-modify-write on a shared file
    loses rows; serialization is the rule that prevents it.
 5. Failures: mark failed in batch-state.md with a one-line reason; the

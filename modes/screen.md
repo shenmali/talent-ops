@@ -48,7 +48,7 @@ Invocation: /talent-ops screen <role-slug> <candidate-slug>
    authenticity_signals"). Do NOT change `scores`, `weighted_total`,
    `recommendation`, or `confidence`. Allowed basis: text-internal
    consistency + evidence-verifiability ONLY; forbidden:
-   face/voice/personality/social-media/demographic inference.
+   face/voice/video/personality/social-media/demographic inference.
 7. Update tracker row -> stage: screened, fill weighted_total and
    confidence columns, set updated_at to today's ISO date.
 8. Report to user: total, confidence, missing_evidence, top risk, and any
