@@ -56,7 +56,8 @@ conflicts with this file, this file wins.
   relayed from a reference call, recorded with human provenance.
 - `score.md`: scores{hard_filters, skill_match, experience_match,
   evidence_match, behavior_signals}, weighted_total, confidence,
-  missing_evidence[], risks[], recommendation, scored_by, scored_at.
+  missing_evidence[], risks[], recommendation, scored_by, scored_at,
+  authenticity_signals[] (optional — see "Authenticity signals").
 - `decision.md`: see templates/decision.md. decided_by MUST be human:*.
 - `packet.md`: assembled by the decision mode — profile summary, evidence
   table, score digest, scorecard digests, risks, ai_recommendation
@@ -157,6 +158,35 @@ vocabularies — never compute `override` by string equality. Alignment:
 - `withdrawn` is candidate-driven: `override: false` always
 `override: true` when the human decision is NOT in the recommendation's
 aligned set above.
+
+## Authenticity signals
+
+`screen` may record up to three **authenticity signals** in `score.md`
+`authenticity_signals[]` — flags for a human reviewer, never an input to the
+score. Each entry has `signal` (one of `unverifiable-exaggeration`,
+`internal-inconsistency`, `evidence-absence`), `severity` (low|medium|high),
+and a concrete `basis` (a quote or observation). A one-line summary is also
+appended to `risks[]` for visibility.
+
+- `unverifiable-exaggeration` — grandiose/outsized claims with no backing
+  (e.g. "transformed company revenue" with no metric, scope, or role).
+- `internal-inconsistency` — contradictions WITHIN the CV (claim vs claim):
+  impossible timelines, role/title or date conflicts. Distinct from an
+  `evidence.md` `contradicted` status (which is claim vs external evidence).
+- `evidence-absence` — a density signal: an unusually high share of
+  must-have claims at `confidence: none`. References `missing_evidence`;
+  flags the pattern ("most claims unbacked"), not the individual gaps.
+
+**Ethical boundary (binding for every mode):**
+- Basis is ONLY text-internal consistency + evidence-verifiability.
+- FORBIDDEN: face/voice/video analysis, personality inference, social-media
+  surveillance, demographic prediction.
+- **No automatic effect:** signals never change `scores`, `weighted_total`,
+  `recommendation`, `confidence`, or stage, and never trigger a rejection.
+- A concrete `basis` is required; absence of signals is the default, NOT a
+  flag.
+- `generic-ai-language` is NOT a signal (AI-assisted writing is normal and
+  not an authenticity concern).
 
 ## Guards (preconditions for every mode)
 
