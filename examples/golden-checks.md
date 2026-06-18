@@ -118,6 +118,19 @@ data/inbox/processed/) were left uncommitted for inspection.
   outcomes, evidence gaps framed as ramp support (not a deficiency verdict),
   Watch-fors drawn from the contract's failure scenario, and NO decision.md
   write.
+- [ ] GC16 — authenticity signals: `/talent-ops screen
+  ai-automation-specialist-hr derek-osei` (all six evidence claims are
+  `confidence: none`). Expect: score.md gains `authenticity_signals[]` with
+  at least one medium/high signal (evidence-absence and/or
+  unverifiable-exaggeration), each with a concrete `basis`; a one-line
+  summary appears in `risks[]`; and `weighted_total`, `recommendation`,
+  `confidence` are UNCHANGED from before the step ran (additive-only). Then
+  `/talent-ops screen ai-automation-specialist-hr maya-lindqvist` (4 high +
+  2 medium evidence claims, advance): expect NO authenticity_signals (or
+  only low). The board shows a severity-colored `⚑ auth` badge for derek and
+  none for maya; derek's candidate page shows the "Authenticity signals"
+  block with the human-check caveat. No signal ever changes a score or
+  triggers a rejection.
 
 **Teardown (optional):** remove `roles/ai-automation-specialist-hr/` and
 `data/inbox/*` leftovers, or keep them as a sandbox.
