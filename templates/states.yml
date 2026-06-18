@@ -38,3 +38,5 @@ reason_codes:
   - stronger-shortlist
   - candidate-withdrew
   - position-filled
+  # hire-positive (for decision: hired); the codes above are decline/withdrawal reasons
+  - meets-requirements
