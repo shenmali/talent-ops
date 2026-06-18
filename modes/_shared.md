@@ -31,7 +31,8 @@ conflicts with this file, this file wins.
 - Candidate dir contents: `source/` (original files, never modified),
   `profile.md`, `evidence.md`, `score.md`, `decision.md`, `packet.md`
   (decision packet, written by the decision mode),
-  `interview/<stage>-plan.md`, `interview/<stage>-scorecard.md`.
+  `interview/<stage>-plan.md`, `interview/<stage>-scorecard.md`,
+  `reference-check.md`, `onboarding.md`.
 - Slugs: lowercase kebab-case. Role slug from title; candidate slug from
   full name (`jane-doe`), add `-2` suffix on collision.
 - Shared data: `data/tracker.md` (pipeline table), `data/quarantine.md`,
@@ -47,10 +48,12 @@ conflicts with this file, this file wins.
   hard_filter_precheck (`pass` | `fail(<filter>)`, written by intake),
   stage (optional non-terminal override, written ONLY by the board's
   change-stage action; a recorded decision always wins over it).
-- `evidence.md`: claims[{claim, source(cv|linkedin|github|portfolio|interview),
+- `evidence.md`: claims[{claim, source(cv|linkedin|github|portfolio|interview|reference),
   evidence, evidence_type(repo|publication|certification|story|none),
   confidence(high|medium|low|none),
   status(unverified|ai-inferred|human-confirmed|contradicted), note}].
+  `source: reference` is written only by the reference-check mode — a fact
+  relayed from a reference call, recorded with human provenance.
 - `score.md`: scores{hard_filters, skill_match, experience_match,
   evidence_match, behavior_signals}, weighted_total, confidence,
   missing_evidence[], risks[], recommendation, scored_by, scored_at.
@@ -61,6 +64,14 @@ conflicts with this file, this file wins.
 - `outreach.md`: chronological draft messages to the candidate (invite |
   reject | offer | followup-update), each stamped `drafted_by: ai:<model>`
   and `status: draft|approved`. Drafts only — never sent. Not a decision.
+- `reference-check.md`: late-stage reference questions targeting still-
+  unproven must-have claims, plus recorded responses. Written by the
+  reference-check mode; consent-gated; never sent. Recording updates
+  `evidence.md` with human provenance. Not a decision.
+- `onboarding.md`: an evidence-grounded 30/60/90 ramp plan for an approved
+  hire (first-90 outcomes -> milestones; evidence gaps -> ramp support).
+  `generated_by: ai:<model>`, `status: draft|approved`. An assistive draft,
+  not a decision.
 - Tracker table header (literal):
   `| candidate | role | stage | weighted_total | confidence | updated_at | note |`
   followed by a `| --- |`-style separator row. Data rows hold the slugs;
