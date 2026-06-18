@@ -332,8 +332,28 @@ git commit -m "feat(post-decision): onboarding mode — evidence-grounded 30/60/
 ### Task 4: Documentation — README + SKILL router
 
 **Files:**
+- Modify: `modes/_shared.md` (Guard 1 list)
 - Modify: `README.md` (command table, How-it-works narrative, mermaid)
 - Modify: `.claude/skills/talent-ops/SKILL.md` (argument-hint, routing table, discovery menu, context loading)
+
+- [ ] **Step 0: `modes/_shared.md` — add `reference-check` to the Guard 1 approved-contract list**
+
+(Surfaced by the Task 2 code-quality review: `reference-check.md` says "see _shared.md Guard 1" but Guard 1 did not name it, making the cross-reference misleading.) Find this exact block in `modes/_shared.md`:
+
+```
+1. jd / screen / batch / triage / interview-kit / decision require the
+   role's contract `status: approved`. Refuse otherwise, naming the missing
+   approval.
+```
+
+Replace it with:
+
+```
+1. jd / screen / batch / triage / interview-kit / decision / reference-check
+   require the role's contract `status: approved`. Refuse otherwise, naming
+   the missing approval. (onboarding's gate is a recorded `decision: hired`,
+   which implies an approved contract.)
+```
 
 - [ ] **Step 1: README — add two command-table rows**
 
@@ -485,14 +505,17 @@ Replace it with:
 Run: `grep -c "reference-check\|onboarding" README.md .claude/skills/talent-ops/SKILL.md`
 Expected: `README.md` >= 3 and `SKILL.md` >= 4 (both new commands present in each).
 
+Run: `grep -n "interview-kit / decision / reference-check" modes/_shared.md`
+Expected: one match (Guard 1 now names reference-check).
+
 Run: `npm run verify`
 Expected: `OK`.
 
 - [ ] **Step 9: Commit**
 
 ```bash
-git add README.md .claude/skills/talent-ops/SKILL.md
-git commit -m "docs(post-decision): add reference-check + onboarding to README + SKILL router"
+git add modes/_shared.md README.md .claude/skills/talent-ops/SKILL.md
+git commit -m "docs(post-decision): add reference-check + onboarding to README + SKILL router; fix Guard 1 list"
 ```
 
 ---
