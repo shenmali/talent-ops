@@ -38,10 +38,22 @@ Invocation: /talent-ops screen <role-slug> <candidate-slug>
    missing_evidence[] contains ONLY must-have claims without evidence
    (nice_to_have gaps are excluded). Body: one rationale paragraph per
    layer. Partial-credit rationales MUST name the skill family.
-6. Update tracker row -> stage: screened, fill weighted_total and
+6. Authenticity signals (ADDITIVE — must not change any score). Evaluate
+   the three signals (see _shared.md "Authenticity signals") against the CV
+   text and the Evidence Ledger you just built. For each that genuinely
+   applies, add an entry to score.md `authenticity_signals[]` with a
+   `severity` and a concrete `basis`; if none apply, OMIT the field
+   (no fabrication — absence is the default). Append a one-line summary to
+   `risks[]` (e.g. "authenticity: 2 signals (1 high) — see
+   authenticity_signals"). Do NOT change `scores`, `weighted_total`,
+   `recommendation`, or `confidence`. Allowed basis: text-internal
+   consistency + evidence-verifiability ONLY; forbidden:
+   face/voice/personality/social-media/demographic inference.
+7. Update tracker row -> stage: screened, fill weighted_total and
    confidence columns, set updated_at to today's ISO date.
-7. Report to user: total, confidence, missing_evidence, top risk — and
-   that this is an assistive recommendation; the decision is theirs.
+8. Report to user: total, confidence, missing_evidence, top risk, and any
+   authenticity signals — and that this is an assistive recommendation; the
+   decision is theirs.
 
 ## Failure modes
 - Weights don't sum to 1.0 -> stop; suggest a define-role revision.
