@@ -40,6 +40,23 @@ function slaFor(stage, days) {
   return 'ok'
 }
 
+const SEVERITY_RANK = { low: 1, medium: 2, high: 3 }
+
+function summarizeAuthenticity(score) {
+  const sigs = Array.isArray(score?.authenticity_signals) ? score.authenticity_signals : []
+  if (!sigs.length) return null
+  let maxRank = 0
+  let maxSeverity = 'low'
+  for (const s of sigs) {
+    const r = SEVERITY_RANK[s?.severity] ?? 0
+    if (r > maxRank) {
+      maxRank = r
+      maxSeverity = s.severity
+    }
+  }
+  return { count: sigs.length, maxSeverity }
+}
+
 export function buildModel(root, { now = new Date() } = {}) {
   const states = loadStates(root)
   const rolesDir = join(root, 'roles')
@@ -79,6 +96,7 @@ export function buildModel(root, { now = new Date() } = {}) {
         recommendation: score?.recommendation ?? null,
         missingCount: Array.isArray(score?.missing_evidence) ? score.missing_evidence.length : null,
         risksTop: Array.isArray(score?.risks) && score.risks.length ? score.risks[0] : null,
+        authenticity: summarizeAuthenticity(score),
         updatedAt,
         daysInStage: days,
         sla: slaFor(stage, days),

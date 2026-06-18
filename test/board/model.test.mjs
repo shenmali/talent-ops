@@ -87,4 +87,22 @@ describe('buildModel', () => {
     const role = buildModel(root, { now: new Date('2026-06-11') }).roles[0]
     expect(role.candidates[0].stage).toBe('triage') // override beats derived 'screened'
   })
+
+  it('summarizes authenticity signals on the card (count + max severity), null when none', () => {
+    const root = makeRepo({
+      'roles/r/role-contract.md': approvedContract,
+      'roles/r/candidates/flagged/profile.md': '---\nname: Flagged\napplied_at: 2026-06-05\n---\nb\n',
+      'roles/r/candidates/flagged/evidence.md': '---\nclaims: []\n---\n',
+      'roles/r/candidates/flagged/score.md':
+        '---\nweighted_total: 2.0\nconfidence: low\nrecommendation: hold\nmissing_evidence: []\nrisks: []\nscored_at: 2026-06-06\nauthenticity_signals:\n  - signal: evidence-absence\n    severity: high\n    basis: "most must-haves unbacked"\n  - signal: unverifiable-exaggeration\n    severity: medium\n    basis: "grandiose claim, no metric"\n---\n',
+      'roles/r/candidates/clean/profile.md': '---\nname: Clean\napplied_at: 2026-06-05\n---\nb\n',
+      'roles/r/candidates/clean/evidence.md': '---\nclaims: []\n---\n',
+      'roles/r/candidates/clean/score.md': '---\nweighted_total: 4.3\nconfidence: high\nrecommendation: advance\nmissing_evidence: []\nrisks: []\nscored_at: 2026-06-06\n---\n',
+    })
+    const role = buildModel(root, { now: new Date('2026-06-11') }).roles[0]
+    const flagged = role.candidates.find((c) => c.slug === 'flagged')
+    const clean = role.candidates.find((c) => c.slug === 'clean')
+    expect(flagged.authenticity).toEqual({ count: 2, maxSeverity: 'high' })
+    expect(clean.authenticity).toBe(null)
+  })
 })
