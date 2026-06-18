@@ -97,6 +97,24 @@ data/inbox/processed/) were left uncommitted for inspection.
   ai-automation-specialist-hr`. Expect: valid JSON with funnel/reasonCodes/
   overrideRate/source; `fairnessSignals.disclaimer` present and states it is
   NOT a protected-class audit.
+- [ ] GC14 — reference-check: `/talent-ops reference-check
+  ai-automation-specialist-hr <a candidate with an unproven must-have, in
+  interview/decision stage>`. Expect (GENERATE phase): refuses to generate
+  until candidate consent is confirmed; once confirmed, questions target
+  ONLY still-unproven must-have claims (each `Q | target | listen for`), no
+  protected-attribute questions; reference-check.md written with
+  `consent:` stamped, NO decision.md created. Then (RECORD phase) report a
+  corroboration: the targeted claim becomes `status: human-confirmed` with
+  a `reference ...recorded by human:<id>` note and its origin `source`
+  preserved; a contradiction becomes `status: contradicted` + a risks note,
+  never an auto-rejection.
+- [ ] GC15 — onboarding: `/talent-ops onboarding ai-automation-specialist-hr
+  <candidate>`. Before a hire: expect refusal ("record the hire decision
+  first"). After recording `decision: hired`: expect onboarding.md with
+  `status: draft`, 30/60/90 milestones mapped from the contract's first-90
+  outcomes, evidence gaps framed as ramp support (not a deficiency verdict),
+  Watch-fors drawn from the contract's failure scenario, and NO decision.md
+  write.
 
 **Teardown (optional):** remove `roles/ai-automation-specialist-hr/` and
 `data/inbox/*` leftovers, or keep them as a sandbox.
