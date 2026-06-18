@@ -56,7 +56,10 @@ flowchart TD
    **Evidence Ledger** — every claim with its source, evidence, confidence
    and verification status — then a decomposable **5-layer score**
    (hard filters · skill · experience · evidence · behavior). Evidence is
-   never fabricated; an unbacked claim stays `confidence: none`.
+   never fabricated; an unbacked claim stays `confidence: none`. It also
+   surfaces up to three **authenticity signals** (unverifiable exaggeration,
+   internal inconsistency, evidence absence) as human-visible flags — never
+   an input to the score, never grounds for an automatic action.
 5. **Triage** — a ranked, confidence-banded queue. Hard-filter fails and
    disqualifier hits are *isolated* into a "requires explicit human look"
    section — never auto-rejected. Bulk reject is gated behind an anti-miss
