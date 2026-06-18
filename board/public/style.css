@@ -25,6 +25,11 @@ h1 { font-size: 20px; } h2 { font-size: 16px; }
 .missing { font-size: 11px; color: var(--warn); margin-left: 4px; }
 .days { float: right; font-size: 11px; border-radius: 8px; padding: 0 6px; }
 .sla-ok { color: var(--ok); } .sla-warn { color: var(--warn); } .sla-over { background: #3a1416; color: var(--over); }
+.auth { font-size: 11px; border-radius: 8px; padding: 0 6px; margin-left: 4px; }
+.auth-low { color: var(--muted); } .auth-medium { color: var(--warn); } .auth-high { background: #3a1416; color: var(--over); }
+.auth-signals { list-style: none; padding: 0; } .auth-signals li { border-left: 3px solid var(--line); padding: 2px 0 2px 8px; margin: 4px 0; }
+.auth-signals li.auth-high { border-left-color: var(--over); } .auth-signals li.auth-medium { border-left-color: var(--warn); }
+.auth-caveat { color: var(--muted); font-size: 12px; }
 table { border-collapse: collapse; width: 100%; }
 th, td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; }
 .ledger .st-contradicted { color: var(--over); } .ledger .st-human-confirmed { color: var(--ok); }

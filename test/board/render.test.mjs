@@ -97,3 +97,45 @@ describe('renderRole', () => {
     expect(html).toContain('href="/role/demo-role/jd"')
   })
 })
+
+describe('authenticity signals', () => {
+  function flaggedRepo() {
+    return makeRepo({
+      'roles/r/role-contract.md': approvedContract,
+      'roles/r/candidates/flagged/profile.md': '---\nname: Flagged\nsource: "inbound:f.txt"\napplied_at: 2026-06-05\n---\nCV\n',
+      'roles/r/candidates/flagged/evidence.md': '---\nclaims: []\n---\n',
+      'roles/r/candidates/flagged/score.md':
+        '---\nweighted_total: 2.0\nconfidence: low\nrecommendation: hold\nmissing_evidence: []\nrisks: ["authenticity: 1 signal (1 high)"]\nscored_at: 2026-06-06\nscores:\n  skill_match: 2\nauthenticity_signals:\n  - signal: evidence-absence\n    severity: high\n    basis: "most must-haves unbacked"\n---\nr\n',
+    })
+  }
+
+  it('renders a severity-colored authenticity badge on the pipeline card', () => {
+    const html = renderPipeline(buildModel(flaggedRepo(), { now: new Date('2026-06-11') }))
+    expect(html).toMatch(/auth-high/)
+  })
+
+  it('renders an authenticity block with signal, severity, basis, and a caveat on the candidate page', () => {
+    const root = flaggedRepo()
+    const detail = loadCandidate(root, 'r', 'flagged')
+    const states = loadStates(root)
+    const html = renderCandidate(detail, states, { tokens: { decision: 'a', evidence: 'b', profileToken: 'c' }, userId: 'ali' })
+    expect(html).toContain('Authenticity signals')
+    expect(html).toContain('evidence-absence')
+    expect(html).toContain('most must-haves unbacked')
+    expect(html).toMatch(/auth-high/)
+    expect(html).toMatch(/not a decision/i)
+  })
+
+  it('omits the authenticity block when a candidate has no signals', () => {
+    const root = makeRepo({
+      'roles/r/role-contract.md': approvedContract,
+      'roles/r/candidates/clean/profile.md': '---\nname: Clean\napplied_at: 2026-06-05\n---\nCV\n',
+      'roles/r/candidates/clean/evidence.md': '---\nclaims: []\n---\n',
+      'roles/r/candidates/clean/score.md': '---\nweighted_total: 4.3\nconfidence: high\nrecommendation: advance\nmissing_evidence: []\nrisks: []\nscored_at: 2026-06-06\nscores:\n  skill_match: 5\n---\nr\n',
+    })
+    const detail = loadCandidate(root, 'r', 'clean')
+    const states = loadStates(root)
+    const html = renderCandidate(detail, states, { tokens: { decision: 'a', evidence: 'b', profileToken: 'c' }, userId: 'ali' })
+    expect(html).not.toContain('Authenticity signals')
+  })
+})

@@ -31,10 +31,12 @@ function card(roleSlug, c) {
   const missing = c.missingCount == null ? '' : `<span class="missing">missing: ${esc(c.missingCount)}</span>`
   const days = c.daysInStage == null ? '' : `<span class="days ${slaClass(c.sla)}">${c.daysInStage}d</span>`
   const rec = c.recommendation ? `<span class="rec rec-${esc(c.recommendation)}">${esc(c.recommendation)}</span>` : ''
+  const auth = c.authenticity && c.authenticity.count > 0
+    ? `<span class="auth auth-${esc(c.authenticity.maxSeverity)}">⚑ auth · ${esc(c.authenticity.maxSeverity)}</span>` : ''
   return `<a class="card" href="/candidate/${esc(roleSlug)}/${esc(c.slug)}">
   <span class="name">${esc(c.name)}</span>
   <span class="score">${score}</span>
-  ${rec}${missing}${days}
+  ${rec}${auth}${missing}${days}
   <span class="src">${esc(c.source)}</span>
 </a>`
 }
@@ -70,6 +72,17 @@ function scoreBreakdown(score) {
 <p>weighted_total: <strong>${esc(score.weighted_total)}</strong> (confidence: ${esc(score.confidence)}) ·
 recommendation: <span class="rec rec-${esc(score.recommendation)}">${esc(score.recommendation)}</span> ·
 <em>assistive — not a decision</em></p>`
+}
+
+function authenticityBlock(score) {
+  const sigs = Array.isArray(score?.authenticity_signals) ? score.authenticity_signals : []
+  if (!sigs.length) return ''
+  const items = sigs.map((s) =>
+    `<li class="auth-${esc(s.severity)}"><strong>${esc(s.signal)}</strong> · ${esc(s.severity)} — ${esc(s.basis)}</li>`
+  ).join('')
+  return `<section><h2>Authenticity signals</h2>
+<ul class="auth-signals">${items}</ul>
+<p class="auth-caveat">Human-check flags — not a decision, never auto-applied. Absence is the default.</p></section>`
 }
 
 function decisionForm(detail, states, token, userId) {
@@ -131,6 +144,7 @@ export function renderCandidate(detail, states, { tokens, userId }) {
 <p><a href="/">← pipeline</a> · <a href="/role/${esc(detail.role)}">role</a></p>
 <section><h2>Evidence ledger</h2>${evidenceTable(detail.claims)}</section>
 <section><h2>Score</h2>${scoreBreakdown(detail.score)}</section>
+${authenticityBlock(detail.score)}
 <section><h2>Decision</h2>${dec}</section>
 <section class="actions"><h2>Actions</h2>
 ${decisionForm(detail, states, tokens.decision, userId)}
