@@ -46,7 +46,7 @@ function summarizeAuthenticity(score) {
   const sigs = Array.isArray(score?.authenticity_signals) ? score.authenticity_signals : []
   if (!sigs.length) return null
   let maxRank = 0
-  let maxSeverity = 'low'
+  let maxSeverity = null
   for (const s of sigs) {
     const r = SEVERITY_RANK[s?.severity] ?? 0
     if (r > maxRank) {
@@ -54,7 +54,7 @@ function summarizeAuthenticity(score) {
       maxSeverity = s.severity
     }
   }
-  return { count: sigs.length, maxSeverity }
+  return { count: sigs.length, maxSeverity: maxSeverity ?? 'unknown' }
 }
 
 export function buildModel(root, { now = new Date() } = {}) {

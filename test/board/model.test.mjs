@@ -105,4 +105,23 @@ describe('buildModel', () => {
     expect(flagged.authenticity).toEqual({ count: 2, maxSeverity: 'high' })
     expect(clean.authenticity).toBe(null)
   })
+
+  it('handles unknown/missing severities: a valid severity wins; all-unknown -> "unknown"', () => {
+    const root = makeRepo({
+      'roles/r/role-contract.md': approvedContract,
+      'roles/r/candidates/mixed/profile.md': '---\nname: Mixed\napplied_at: 2026-06-05\n---\nb\n',
+      'roles/r/candidates/mixed/evidence.md': '---\nclaims: []\n---\n',
+      'roles/r/candidates/mixed/score.md':
+        '---\nweighted_total: 2.0\nconfidence: low\nrecommendation: hold\nmissing_evidence: []\nrisks: []\nscored_at: 2026-06-06\nauthenticity_signals:\n  - signal: evidence-absence\n    severity: high\n    basis: "x"\n  - signal: unverifiable-exaggeration\n    severity: bogus\n    basis: "y"\n---\n',
+      'roles/r/candidates/oddonly/profile.md': '---\nname: Odd\napplied_at: 2026-06-05\n---\nb\n',
+      'roles/r/candidates/oddonly/evidence.md': '---\nclaims: []\n---\n',
+      'roles/r/candidates/oddonly/score.md':
+        '---\nweighted_total: 2.0\nconfidence: low\nrecommendation: hold\nmissing_evidence: []\nrisks: []\nscored_at: 2026-06-06\nauthenticity_signals:\n  - signal: evidence-absence\n    severity: bogus\n    basis: "z"\n---\n',
+    })
+    const role = buildModel(root, { now: new Date('2026-06-11') }).roles[0]
+    const mixed = role.candidates.find((c) => c.slug === 'mixed')
+    const odd = role.candidates.find((c) => c.slug === 'oddonly')
+    expect(mixed.authenticity).toEqual({ count: 2, maxSeverity: 'high' })
+    expect(odd.authenticity).toEqual({ count: 1, maxSeverity: 'unknown' })
+  })
 })
