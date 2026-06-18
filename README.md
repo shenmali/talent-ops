@@ -34,7 +34,10 @@ flowchart TD
     SC -->|"evidence.md + score.md"| TR["triage"]
     TR -->|"your reason-coded decision"| IK["interview-kit"]
     IK -->|"scorecards"| DE["decision"]
+    IK -.->|"verify unproven claims"| RC["reference-check"]
+    RC -.->|"evidence.md (source: reference)"| DE
     DE -->|"decision.md (decided_by: human:*)"| MEM["talent memory"]
+    DE -.->|"hired"| ONB["onboarding (30/60/90)"]
     TR -.->|"any time"| V["npm run verify · export-audit"]
 ```
 
@@ -67,6 +70,12 @@ flowchart TD
    for rediscovery when a future role opens; `verify` checks integrity and
    `export-audit` produces a per-role compliance package on demand.
 
+After a decision, two post-decision modes extend the same evidence trail:
+**reference-check** turns still-unproven must-haves into structured
+reference questions and records the outcome back into the ledger
+(`source: reference`); **onboarding** turns an approved hire's first-90
+outcomes and evidence gaps into a 30/60/90 ramp plan.
+
 ## Commands
 
 | Command | What happens |
@@ -79,6 +88,8 @@ flowchart TD
 | `/talent-ops triage <role>` | Ranked queue -> reason-coded human decisions |
 | `/talent-ops interview-kit <role> <cand>` | Interview plan targeting evidence gaps |
 | `/talent-ops decision <role> <cand>` | Decision packet -> recorded human decision |
+| `/talent-ops reference-check <role> <cand>` | Reference questions for unproven claims; records outcomes to the ledger |
+| `/talent-ops onboarding <role> <cand>` | Evidence-grounded 30/60/90 ramp plan for a hire |
 | `/talent-ops outreach <role> <cand>` | Draft a candidate message (invite/reject/offer) — never sent |
 | `/talent-ops followup` | Surface candidates waiting past cadence + draft an update |
 | `/talent-ops analytics [role]` | Hiring funnel + insights (override rate, sources, fairness signals) |

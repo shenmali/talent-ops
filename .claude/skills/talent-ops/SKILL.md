@@ -2,7 +2,7 @@
 name: talent-ops
 description: Evidence-based hiring command center — define roles, generate JDs, screen applications, triage with reason-coded decisions
 user_invocable: true
-argument-hint: "[define-role | jd | intake | screen | batch | triage | interview-kit | decision | outreach | followup | analytics | tracker | memory]"
+argument-hint: "[define-role | jd | intake | screen | batch | triage | interview-kit | decision | reference-check | onboarding | outreach | followup | analytics | tracker | memory]"
 ---
 
 # talent-ops — Router
@@ -22,6 +22,8 @@ Determine the mode from the first argument:
 | `triage <role-slug>` | triage |
 | `interview-kit <role-slug> <candidate-slug>` | interview-kit |
 | `decision <role-slug> <candidate-slug>` | decision |
+| `reference-check <role-slug> <candidate-slug>` | reference-check |
+| `onboarding <role-slug> <candidate-slug>` | onboarding |
 | `outreach <role-slug> <candidate-slug> [type]` | outreach |
 | `followup` | followup |
 | `analytics [role-slug]` | analytics |
@@ -48,6 +50,8 @@ talent-ops — Hiring Command Center
   /talent-ops triage <role>          -> Ranked queue + reason-coded human decisions
   /talent-ops interview-kit <role> <cand> -> Structured interview plan from evidence gaps
   /talent-ops decision <role> <cand> -> Decision packet + recorded human decision
+  /talent-ops reference-check <role> <cand> -> Reference questions for unproven claims; records outcomes
+  /talent-ops onboarding <role> <cand> -> Evidence-grounded 30/60/90 ramp plan for a hire
   /talent-ops outreach <role> <cand>  -> Draft candidate message (invite/reject/offer); never sent
   /talent-ops followup                -> Candidates waiting past cadence + update draft
   /talent-ops analytics [role]        -> Hiring funnel + insights
@@ -62,11 +66,13 @@ Integrity: npm run verify
 ## Context loading
 
 - Modes requiring `modes/_shared.md` + their own file: define-role, jd,
-  intake, screen, batch, triage, interview-kit, decision.
-  (Note: Guard 1 in _shared.md — the approved-contract gate — applies only
-  to jd, screen, batch, triage, interview-kit, decision. define-role and
-  intake load _shared.md for slug/quarantine/provenance rules and run
-  without an approved contract.)
+  intake, screen, batch, triage, interview-kit, decision, reference-check,
+  onboarding.
+  (Note: Guard 1 in _shared.md — the approved-contract gate — applies to
+  jd, screen, batch, triage, interview-kit, decision, reference-check.
+  onboarding requires a recorded `decision: hired` (which implies an
+  approved contract). define-role and intake load _shared.md for
+  slug/quarantine/provenance rules and run without an approved contract.)
 - Standalone (own file only): tracker, memory.
 - Standalone (own file only; followup/analytics additionally invoke their respective script): outreach, followup, analytics.
 - `batch` delegates per-candidate work to subagents, injecting the content

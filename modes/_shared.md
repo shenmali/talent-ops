@@ -160,9 +160,10 @@ aligned set above.
 
 ## Guards (preconditions for every mode)
 
-1. jd / screen / batch / triage / interview-kit / decision require the
-   role's contract `status: approved`. Refuse otherwise, naming the missing
-   approval.
+1. jd / screen / batch / triage / interview-kit / decision / reference-check
+   require the role's contract `status: approved`. Refuse otherwise, naming
+   the missing approval. (onboarding's gate is a recorded `decision: hired`,
+   which implies an approved contract.)
 2. Never fabricate evidence. No evidence found => confidence `none`,
    status `unverified`.
 3. External fetching: ONLY URLs the candidate provided in their materials.
